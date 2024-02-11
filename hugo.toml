@@ -1,0 +1,5 @@
+baseURL = 'https://johnhenriksson.se/'
+languageCode = 'en-us'
+title = 'John Henriksson Blog Site'
+theme = 'hugo-geekblog'
+sectionPagesMenu = 'main'
