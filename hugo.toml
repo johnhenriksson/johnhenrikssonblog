@@ -1,6 +1,6 @@
-baseURL = 'https://johnhenriksson.se/'
+baseURL = 'https://nerd-geek.com/'
 languageCode = 'en-us'
-title = 'John Henriksson Blog Site'
+title = 'NerdGeek'
 theme = 'hugo-geekblog'
 sectionPagesMenu = 'main'
 pygmentsUseClasses = true
