@@ -3,3 +3,5 @@ languageCode = 'en-us'
 title = 'John Henriksson Blog Site'
 theme = 'hugo-geekblog'
 sectionPagesMenu = 'main'
+pygmentsUseClasses = true
+pygmentsCodeFences = true
