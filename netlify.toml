@@ -1,5 +1,5 @@
 [build]
-  publish = "docs/public"
+  publish = "./public"
   command = "make doc"
 
   [build.environment]
