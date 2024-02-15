@@ -1,6 +1,6 @@
 baseURL = 'https://nerd-geek.com/'
 languageCode = 'en-us'
-title = 'NerdGeek'
+title = 'Nerd-Geek.com'
 theme = 'hugo-geekblog'
 sectionPagesMenu = 'main'
 pygmentsUseClasses = true

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on John Henriksson Blog Site</title>
+    <link>https://johnhenriksson.se/blog/</link>
+    <description>Recent content in Blogs on John Henriksson Blog Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 13 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://johnhenriksson.se/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Monitor Trident with Prometheus and Grafana</title>
+      <link>https://johnhenriksson.se/blog/2021/monitor-trident-w-prometheus-grafana/</link>
+      <pubDate>Mon, 13 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2021/monitor-trident-w-prometheus-grafana/</guid>
+      <description>Trident provides Prometheus metrics endpoints that you can use to monitor Trident, its performance, and understand your environment. In this blog, we&amp;rsquo;ll deep dive into how to install and configure Prometheus to monitor Trident.&#xA;I&amp;rsquo;ve set up my Kubernetes cluster with kubeadm, and it consists of four nodes, one master node, and three worker nodes. As Kubernetes has no built-in storage, I&amp;rsquo;ve deployed the software-defined version of NetApp ONTAP called ONTAP Select.</description>
+    </item>
+    <item>
+      <title>ONTAP Select vCenter Plug-In</title>
+      <link>https://johnhenriksson.se/blog/2021/ontap-select-vcenter-plugin/</link>
+      <pubDate>Thu, 22 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2021/ontap-select-vcenter-plugin/</guid>
+      <description>This was a new discovery for me! Maybe everyone already knows about the ONTAP Select vCenter Plug-in - but for me, it&amp;rsquo;s a new acquaintance. With the plug-in, you quickly deploy and manage ONTAP clusters on your VMware environment, all from vCenter.&#xA;Let us start with what ONTAP Select is and go through the architecture of the ONTAP Select deployment process.&#xA;What is ONTAP Select? ONTAP Select is the software-defined version of NetApp&amp;rsquo;s storage operating system ONTAP.</description>
+    </item>
+    <item>
+      <title>Deploy K8s VM&#39;s with Terraform on vSphere</title>
+      <link>https://johnhenriksson.se/blog/2021/deploy-k8s-vms-with-terraform-on-vsphere/</link>
+      <pubDate>Thu, 21 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2021/deploy-k8s-vms-with-terraform-on-vsphere/</guid>
+      <description>I&amp;rsquo;m on my way to deploying Kubernetes the hard way, following Kelsey Hightowers GitHub tutorial. The guide uses GCP for compute resources, but I want to utilize my home lab based on VMware, and I want to do it in a cloud fashion, with Infrastructure as Code. For this, I leverage tools like Packer and Terraform. In my previous post, I showed you how to build a VM template on vSphere with Packer.</description>
+    </item>
+    <item>
+      <title>Build Ubuntu 20.04 VM on vSphere with Packer</title>
+      <link>https://johnhenriksson.se/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/</link>
+      <pubDate>Fri, 18 Dec 2020 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/</guid>
+      <description>I have a home lab in my basement for learning purposes and to be able to create useful content on this blog. My next mission is to learn more about Kubernetes and advance my knowledge of IaC and Linux. For this, I need a consistent way to build and deploy Ubuntu VM&amp;rsquo;s. In this post, I&amp;rsquo;ll show you how I use Packer to create VM templates on vSphere.&#xA;What is Packer?</description>
+    </item>
+    <item>
+      <title>Trident - Persistance in an Ephemeral World</title>
+      <link>https://johnhenriksson.se/blog/2020/trident-persistance-in-an-ephemeral-world/</link>
+      <pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2020/trident-persistance-in-an-ephemeral-world/</guid>
+      <description>We all know Kubernetes is winning the container orchestration battle. We&amp;rsquo;ve seen a shift in application development and operations. Historically, software vendors shipped .EXE files to customers, small and large. The update cycle meant a new .EXE release every 6-12 months, or something similar.&#xA;Now, the reality is that more and more software vendors turn to containers as shipping their products. Containers provide the ability to re-create the application regardless of the environment, both in development and production.</description>
+    </item>
+    <item>
+      <title>Deploy VMware Cloud Director with PowerShell</title>
+      <link>https://johnhenriksson.se/blog/2020/deploy-vcd-10-w-powershell/</link>
+      <pubDate>Thu, 04 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2020/deploy-vcd-10-w-powershell/</guid>
+      <description>In my home lab, I like to automate as much as possible so I can bring stuff up/down quickly. To achieve this I use several tools such as Ansible, Terraform and PowerShell. This time I decided on using PowerShell to quickly bring up VCD with the same settings every time.&#xA;This script deploys the appliance and please, edit the settings to fit your environment.&#xA;First, you need to download the VCD Appliance 10.</description>
+    </item>
+    <item>
+      <title>Enable Hyperthreading in BIOS with Ansible on VMware hosts</title>
+      <link>https://johnhenriksson.se/blog/2020/enable-ht-ansible-dellemc-vmware/</link>
+      <pubDate>Sun, 22 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2020/enable-ht-ansible-dellemc-vmware/</guid>
+      <description>Recently, I found a configuration issue on a VMware cluster running on DellEMC hardware. Initially, they were vulnerable to the L1 Terminal Fault CVE-2018-3646, to mitigate we disabled HT in the BIOS of the hosts. As time passed, VMware released software updates to mitigate these issues. We did install the patches, but the disabled HT stayed the same. When the problem came to light, I decided to put Ansible to work as I did not want to perform manual work on the entire cluster.</description>
+    </item>
+    <item>
+      <title>VCAP Design Study Notes</title>
+      <link>https://johnhenriksson.se/blog/2020/vcap-design-study/</link>
+      <pubDate>Wed, 19 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2020/vcap-design-study/</guid>
+      <description>In the year 2019(it feels like a million years ago, right?!), I started my VMware Certification journey. In short, I passed my first VCP6, renewed it to 2019, and passed the VMware Cloud Provider Specialist exam. After a successful 2019, I went on parental leave from November to February. Now, when I&amp;rsquo;m back in action, I need to continue expanding my knowledge and have new goals to achieve in 2020. At first, I thought about going after the AZ-103 exam because some of my colleagues are going down the Azure route, but, as I&amp;rsquo;m already a VCP, I think it&amp;rsquo;s wrong not to continue to the advanced certifications.</description>
+    </item>
+    <item>
+      <title>Port Forward on vCloud Director with Terraform</title>
+      <link>https://johnhenriksson.se/blog/2019/terraform-vcloud-port-forward/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2019/terraform-vcloud-port-forward/</guid>
+      <description>My Terraform adventures continue! In my last post, I covered how to provision a VM on vCloud Director with the help of Terraform. I&amp;rsquo;m just at the beginning of my IaC journey, but I already see the benefits of using this method to deploy infrastructure. The main advantage of using IaC is that you easily can re-use the code on multiple similar projects. When you start a new project, it&amp;rsquo;s just a matter of copying your codebase and modifying it to fit the current project.</description>
+    </item>
+    <item>
+      <title>Create VM on VMware vCloud Director with Terraform</title>
+      <link>https://johnhenriksson.se/blog/2019/create-vm-terraform-vcloud/</link>
+      <pubDate>Wed, 20 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2019/create-vm-terraform-vcloud/</guid>
+      <description>One of the things I enjoy the most in life is to learn new exciting stuff, the part I like the most is how to create. Whether it&amp;rsquo;s in the physical world such as carpentry or homebrewing(I love to brew beer!), or if it&amp;rsquo;s in the virtual computer world where I like to create infrastructure. On the other hand, I also enjoy sharing that knowledge with other people! In this post, I&amp;rsquo;ll share how to create a virtual machine in a software-defined data center(running vCloud Director) with the help of Terraform.</description>
+    </item>
+    <item>
+      <title>VMware Proactive HA</title>
+      <link>https://johnhenriksson.se/blog/2019/vmware-proactive-ha/</link>
+      <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2019/vmware-proactive-ha/</guid>
+      <description>You are a VMware Administrator. In your data center, there&amp;rsquo;s a vSphere 6.0 cluster running rock-solid! But, with the 6.0 end of support coming up March 12, 2020, you&amp;rsquo;re forced to look into the newer version of vSphere. You may have noticed that there&amp;rsquo;s been a couple of improvements and new features since 6.0 came out. In this post, I&amp;rsquo;ll walk you through the feature called Proactive HA, released in 6.</description>
+    </item>
+    <item>
+      <title>Top 5 NetApp blogs to follow in 2019</title>
+      <link>https://johnhenriksson.se/blog/2019/top-5-netapp-blogs/</link>
+      <pubDate>Sun, 10 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2019/top-5-netapp-blogs/</guid>
+      <description>If you&amp;rsquo;re like me, eager to learn and absorb all of the knowledge, you need to have a couple of useful blogs to follow. In this post, I list 5 of my favorite NetApp blogs that I follow regularly.&#xA;IOPS.ca This blog by Chris Maki is easy to consume with it&amp;rsquo;s relatively short and relevant posts. This blog focus on NetApp products and features.&#xA;Why do you like WAFLs? This blog is, in my opinion, the best place to learn fundamental concepts of SAN, NAS &amp;amp; ONTAP.</description>
+    </item>
+    <item>
+      <title>NetApp Influencer of the Year 2019</title>
+      <link>https://johnhenriksson.se/blog/2019/influencer-of-the-year/</link>
+      <pubDate>Sat, 26 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2019/influencer-of-the-year/</guid>
+      <description>A couple of days ago, the yearly NetApp partner event in Sweden took place. When I got the invitation, I immediately accepted. But, days before, my kids got both chicken-pox and otitis at the same time, I was forced to cancel.&#xA;The day after the event took place, I got an email from one of the organizers that I did win the &amp;ldquo;Influencer of the Year&amp;rdquo;-award.&#xA;Although I&amp;rsquo;m regretful that I couldn&amp;rsquo;t attend, I&amp;rsquo;m incredibly grateful to be recognized for my efforts!</description>
+    </item>
+    <item>
+      <title>VMUG Sweden Event October</title>
+      <link>https://johnhenriksson.se/blog/2019/vmug-event-october-19/</link>
+      <pubDate>Fri, 04 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2019/vmug-event-october-19/</guid>
+      <description>First of all, I would like to thank everyone that attended our first VMUG event in Sweden. Also, a BIG thank you to our sponsors!&#xA;At first, I was troubled that everyone would be no-shows. Then, I got overwhelmed at how many that showed up! When we had our first meeting planning the event, we had a plan and conference room for about ten people, but we were roughly 35 attendees!</description>
+    </item>
+    <item>
+      <title>NetApp NCIE-SAN NS0-509 Review</title>
+      <link>https://johnhenriksson.se/blog/2019/ncie-san-ns0-509/</link>
+      <pubDate>Mon, 16 Sep 2019 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2019/ncie-san-ns0-509/</guid>
+      <description>I&amp;rsquo;ve stepped out of the certification room, super excited to have passed the NS0-509 exam. It was a challenge! I did pass the NCSA (NS0-160) exam before the summer, so I had some experience in how the NetApp certification program works. I&amp;rsquo;ll share my experience with the NS0-509 exam in this blog post.&#xA;Let me give you some background about myself. I started working with storage in about 2015 as a VMware admin.</description>
+    </item>
+    <item>
+      <title>VMUG Sweden Leader Package</title>
+      <link>https://johnhenriksson.se/blog/2019/vmug-leader-package/</link>
+      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2019/vmug-leader-package/</guid>
+      <description>I am proud to announce myself as a VMUG Leader in the Sweden Community! The journey has just started, and we&amp;rsquo;ve planned our first event in October! I&amp;rsquo;m super excited to be a part of the community and to lead the local group forward!&#xA;Read more about the event at the community event page.&#xA;Yesterday I received the welcome package from VMware, and I&amp;rsquo;m happy to share with you what I got!</description>
+    </item>
+    <item>
+      <title>VAMI Certificate in SSL Hybrid Mode</title>
+      <link>https://johnhenriksson.se/blog/2019/vami-certificate/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2019/vami-certificate/</guid>
+      <description>When you&amp;rsquo;ve configured your vCenter Server Appliance to be a subordinate certificate authority, the VAMI interface at https://vcenter:5480 doesn&amp;rsquo;t use the new certificate, and it uses a self-signed certificate. In this post, I show you how to resolve this.&#xA;First, SSH into the vCSA and locate the certificate file you signed at your CA for the vCSA appliance, it should be named something like vmca.crt or vmca.cer.&#xA;Copy and rename that file:</description>
+    </item>
+    <item>
+      <title>Core Services needed to run VMware vSphere</title>
+      <link>https://johnhenriksson.se/blog/2019/core-services/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2019/core-services/</guid>
+      <description>Often when we set up vSphere environments, there are already some things running. Sometimes it may be an Active Directory domain with DNS, NTP, CA, and all that setup. However, if you&amp;rsquo;re setting up a completely new environment, none of that may exist. What should you do then? We&amp;rsquo;ll cover all of that in this post.&#xA;People often discard the importance of core services. For example, they install vSphere with static entries in the host file instead of using a DNS server.</description>
+    </item>
+    <item>
+      <title>My first post</title>
+      <link>https://johnhenriksson.se/blog/2019/first-post/</link>
+      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>https://johnhenriksson.se/blog/2019/first-post/</guid>
+      <description>I followed Dave Ceddias awesome guide on how to get a Gatsbyjs blog up and running, you&amp;rsquo;ll find the guide here.&#xA;My requirements was a minimal blog that was easy to manage. I needed to be able to write in markup syntax and have code higlighting.&#xA;Gatsbyjs is really aweseom, it lets med do all that and is lightning fast!&#xA;Wish me good luck!</description>
+    </item>
+  </channel>
+</rss>
