@@ -4,6 +4,13 @@
     --code-max-height: 60rem;
   }
   
+  .gblog-markdown pre, .gblog-markdown code {
+    background-color: #002b36;
+    border-radius: 0.15rem;
+    color: 	#839496;
+    font-size: .875rem;
+    line-height: 1rem;
+  }
   /* Light mode theming */
   :root,
   :root[color-theme="light"] {
@@ -83,6 +90,13 @@
   }
   
   /* Dark mode theming */
+
+  :root[color-theme=dark] .chroma .nt {
+    color: #268bd2;
+  }
+  :root[color-theme=dark] .chroma .kc {
+    color: #d33682;
+  }
   :root[color-theme="dark"] {
     --header-background: #16537e;
     --header-font-color: #ffffff;
