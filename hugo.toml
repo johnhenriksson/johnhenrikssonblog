@@ -5,3 +5,4 @@ theme = 'hugo-geekblog'
 sectionPagesMenu = 'main'
 pygmentsUseClasses = true
 pygmentsCodeFences = true
+googleAnalytics = "G-RHTJKJXTF6"
