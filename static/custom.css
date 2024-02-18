@@ -91,6 +91,10 @@
   
   /* Dark mode theming */
 
+  :root[color-theme=dark] .chroma .err {
+    background-color: transparent;
+  }
+
   :root[color-theme=dark] .chroma .nt {
     color: #268bd2;
   }
