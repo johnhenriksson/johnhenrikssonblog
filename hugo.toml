@@ -6,3 +6,7 @@ sectionPagesMenu = 'main'
 pygmentsUseClasses = true
 pygmentsCodeFences = true
 googleAnalytics = "G-RHTJKJXTF6"
+
+[services]
+  [services.disqus]
+    shortname = 'nerd-geek'
