@@ -88,7 +88,7 @@
 /* TextWhitespace */ .chroma .w {  }
 
 
-@media screen and (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
     /* Paste the dark syntax CSS here, e.g. solarized-dark */
     /* Background */ .bg { color: #93a1a1; background-color: #002b36; }
 /* PreWrapper */ .chroma { color: #93a1a1; background-color: #002b36; }
