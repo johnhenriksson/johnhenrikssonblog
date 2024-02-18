@@ -1,39 +1,11 @@
 /* Global customization */
-
+@import url(syntax.css);
 :root {
     --code-max-height: 60rem;
   }
   
   
   /* Light mode theming */
-
-  /* :root[color-theme=light] .gblog-markdown pre, .gblog-markdown code {
-    background-color: #fdf6e3;
-    border-radius: 0.15rem;
-    color: 	#839496;
-    font-size: .875rem;
-    line-height: 1rem;
-  }
-
-  :root .chroma .k, :root[color-theme=light] .chroma .k {
-    color: 	#839496;
-    font-weight: normal;
-  }
-  :root .chroma .n, :root[color-theme=light] .chroma .n {
-    color: #268bd2;
-  }
-
-  :root .chroma .err, :root[color-theme=light] .chroma .err {
-    color: #a61717;
-    background-color: transparent;
-  }
-
-  :root[color-theme=light] .chroma .nt {
-    color: #268bd2;
-  }
-  :root[color-theme=light] .chroma .kc {
-    color: #d33682;
-  } */
 
   :root,
   :root[color-theme="light"] {
@@ -52,8 +24,8 @@
     --link-color-visited: #9ebccf;
   
     --code-background: #fdf6e3;
-    --code-accent-color: #e3e7eb;
-    --code-accent-color-lite: #eff1f3;
+    --code-accent-color: 	#b58900;
+    --code-accent-color-lite: #cb4b16;
     --code-font-color: 	#657b83;
   
     --code-copy-background: #f8f9fa;
@@ -114,24 +86,6 @@
   
   /* Dark mode theming */
 
-  /* :root[color-theme=dark] .gblog-markdown pre, .gblog-markdown code {
-    background-color: #002b36;
-    border-radius: 0.15rem;
-    color: 	#839496;
-    font-size: .875rem;
-    line-height: 1rem;
-  }
-
-  :root[color-theme=dark] .chroma .err {
-    background-color: transparent;
-  }
-
-  :root[color-theme=dark] .chroma .nt {
-    color: #268bd2;
-  }
-  :root[color-theme=dark] .chroma .kc {
-    color: #d33682;
-  } */
   :root[color-theme="dark"] {
     --header-background: #16537e;
     --header-font-color: #ffffff;
