@@ -3,8 +3,6 @@ languageCode = 'en-us'
 title = 'Nerd-Geek.com'
 theme = 'hugo-geekblog'
 sectionPagesMenu = 'main'
-pygmentsUseClasses = true
-pygmentsCodeFences = true
 googleAnalytics = "G-RHTJKJXTF6"
 
 [services]
