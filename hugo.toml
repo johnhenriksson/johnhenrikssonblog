@@ -5,10 +5,6 @@ theme = 'hugo-geekblog'
 sectionPagesMenu = 'main'
 googleAnalytics = "G-RHTJKJXTF6"
 
-[services]
-  [services.disqus]
-    shortname = 'nerd-geek'
-
 pluralizeListTitles = false
 
 # Geekblog required configuration
