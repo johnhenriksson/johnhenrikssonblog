@@ -5,6 +5,7 @@ theme = 'hugo-geekblog'
 sectionPagesMenu = 'main'
 googleAnalytics = "G-RHTJKJXTF6"
 
+
 pluralizeListTitles = false
 
 # Geekblog required configuration
@@ -19,6 +20,11 @@ disablePathToLower = true
   [markup.tableOfContents]
     startLevel = 1
     endLevel = 9
+
+
+[services]
+  [services.disqus]
+    shortname = 'nerd-geek'
 
 [taxonomies]
   author = "authors"

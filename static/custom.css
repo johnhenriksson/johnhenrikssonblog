@@ -1,5 +1,4 @@
 /* Global customization */
-@import url(syntax.css);
 :root {
     --code-max-height: 60rem;
   }
