@@ -1,10 +1,10 @@
 ---
 title: Download and Activate ONTAP One
 date: 2024-02-26
-description: In May 2023 NetApp released the new licensing model ONTAP One which made it possible for everyone with active support to get use of premium-priced features such as SnapLock and Anti Ransomware. In this post, I will cover how you download and enable the new license on your system
+description: In early 2023 NetApp released the new licensing model ONTAP One which made it possible for everyone with active support to get use of premium-priced features such as SnapLock and Anti Ransomware. In this post, I will cover how you download and enable the new license on your system
 ---
 
-In May 2023 NetApp released the new licensing model ONTAP One which made it possible for everyone with active support to get use of premium-priced features such as SnapLock and Anti Ransomware. In this post, I will cover how you download and enable the new license on your system
+In early 2023 NetApp released the new licensing model ONTAP One which made it possible for everyone with active support to get use of premium-priced features such as SnapLock and Anti Ransomware. In this post, I will cover how you download and enable the new license on your system
 
 The license change is non-disruptive and you can enable the new unlocked features in a safe manner when you wish.
 
