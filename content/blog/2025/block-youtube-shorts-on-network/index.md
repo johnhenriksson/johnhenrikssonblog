@@ -2,12 +2,16 @@
 title: 'Block Youtube Shorts on Network'
 date: 2025-09-18
 ---
-YT Shorts is an annoying, addictive video service that my kids love. I've been looking for a way to disable just the shorts feature as they are allowed to view "classic videos". In my search I stumbled upon this guide, which I've extended on https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452 
+YouTube Shorts is an annoying, addictive video service that my kids love. I've been looking for a way to disable just the shorts feature as they are allowed to view "classic videos". In my search I stumbled upon this guide, which I've extended on https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452 
 
-What I learned is that the requests to YouTube have the parameter &ctier=SH so you need to intersect the traffic to YouTube and block these specific request, while allowing the rest.
+What I learned is that the requests to YouTube have the parameter **&ctier=SH** so you need to intersect the traffic to YouTube and block these specific request, while allowing the rest.
 
-In my setup I use pihole as DNS server and I use a CA certificate to sign the Nginx certificate. I need a CA as that is the only way to get the trust to iPhone/iPad.
+In my setup I use pihole as DNS server and I use a CA certificate to sign the Nginx certificate on a seperate Ubuntu server. I need a CA as that is the only way to get the trust to iPhone/iPad.
 
+The flow looks something like this:
+
+![YT SH Diagram](ytsh.png)
+# Pi-hole configuration
 First, I needed my DNS server to in a wildcard manner redirect *.googlevideos.com to my nginx server at 10.128.128.102
 
 This is done through dnsmasq and if you go to Settings -> All Settings -> Miscellaneous -> misc.dnsmasq_lines and you add the line as below.
@@ -20,7 +24,9 @@ address=/googlevideo.com/10.128.128.102
 
 ![pihole screenshot](image.png)
 
-First step done, now it's time to move on to the ngnix server, hosted on Ubuntu.
+# Set up certificates and nginx proxy on Ubuntu
+
+First step done, now it's time to move on to the ngnix server, hosted on Ubuntu 22.04.
 
 We need SSL certificates as we will do a SSL proxy. I will generate a CA certificate and then sign the certificate needed for nginx, this as iPhones won't accept to import and trust a standalone self-signed certificate.
 
@@ -36,7 +42,7 @@ We need a key for our CA
 openssl genrsa -aes256 -out ca-key.pem 4096
 ```
 
-Next step, create a certificate for our CA, important to specify the days to 365 as Apple won't accept any CA beyond 1 year
+Next step, create a certificate for our CA, **important to specify the days to 365** as Apple won't accept any CA beyond 1 year
 ```bash
 openssl req -new -x509 -sha256 -days 365 -key ca-key.pem -out ca.pem
 ```
@@ -97,6 +103,8 @@ openssl x509 -in cert.crt -text -noout | grep -A1 "Subject Alternative Name"
 ```
 ![openssl screenshot](j2jimage.png)
 
+## Configure proxy
+
 Now it's time to configure the nginx web proxy
 
 To install nginx do
@@ -105,7 +113,7 @@ apt update
 apt install nginx
 ```
 
-Add this to /etc/nginx/nginx.conf (I've copied this from the excellent guide)
+Add this to /etc/nginx/nginx.conf - I've copied this from the excellent [guide mentioned at the start](https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452)
 ```bash
 # Use DNS server to resolve IP address of a domain
 resolver 8.8.8.8 8.8.4.4 valid=300s;
@@ -146,6 +154,7 @@ Restart nginx to apply the configuration 
 ```bash
 service nginx restart
 ```
+# Conclusion
 
 Now, every device using pihole as DNS will have YT shorts blocked.
 

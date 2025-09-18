@@ -24,7 +24,7 @@ disablePathToLower = true
 
 [services]
   [services.disqus]
-    shortname = 'johnhenriksson'
+    shortname = 'johnhenriksson-se'
 
 [taxonomies]
   author = "authors"

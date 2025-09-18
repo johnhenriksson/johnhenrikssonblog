@@ -340,6 +340,7 @@
 <p><em>Packer is an open-source tool for creating identical machine images for multiple platforms from a single source configuration. Packer is lightweight, runs on every major operating system, and is highly performant, creating machine images for multiple platforms in parallel. Packer does not replace configuration management like Chef or Puppet. In fact, when building images, Packer is able to use tools like Chef or Puppet to install software onto the image.</em></p>
 <p><a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://www.packer.io/intro"
 >packer.io</a></p>
 <p>So basically, you can use Packer to build VM&rsquo;s from ISO&rsquo;s based on code. Infrastructure as code, just how we like it. Also, it&rsquo;s easy to implement in your CI/CD pipeline to go full hipster.</p>
@@ -356,6 +357,7 @@
 </div>
 <p>I will not go through the installation process in this blog. Please visit the getting started guide on packer.io if you need help installing. <a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://learn.hashicorp.com/tutorials/packer/getting-started-install"
 >You&rsquo;ll find it here.</a></p>
 <div class="flex align-center gblog-post__anchorwrap">
@@ -378,6 +380,7 @@
 </span></span></code></pre></div><p>Also, you&rsquo;ll need to upload an ISO to the vSphere datastore and edit the iso_url variable. I&rsquo;ve uploaded the ISO to my NVME datastore, as you see here.</p>
 <p><a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://releases.ubuntu.com/20.10/ubuntu-20.10-live-server-amd64.iso"
 >Download Ubuntu Server ISO</a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;iso_url&#34;</span><span class="err">:</span> <span class="s2">&#34;[NVME] ISO/ubuntu-20.04.1-live-server-amd64(1).iso&#34;</span>
@@ -594,7 +597,7 @@
             return;
         }
         var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "johnhenriksson" + '.disqus.com/embed.js';
+        s.src = '//' + "johnhenriksson-se" + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();

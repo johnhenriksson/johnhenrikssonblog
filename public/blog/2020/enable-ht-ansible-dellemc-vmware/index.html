@@ -329,10 +329,12 @@
 <p>Recently, I found a configuration issue on a VMware cluster running on DellEMC hardware. Initially, they were vulnerable to the L1 Terminal Fault CVE-2018-3646, to mitigate we disabled HT in the BIOS of the hosts. As time passed, VMware released software updates to mitigate these issues. We did install the patches, but the disabled HT stayed the same. When the problem came to light, I decided to put Ansible to work as I did not want to perform manual work on the entire cluster. So the adventure begins!</p>
 <p>First, if you&rsquo;re on an affected CPU architecture, Intel Skylake in our case, you need to verify that you&rsquo;ve implemented the Side-Channel-Aware Scheduler in VMware. I&rsquo;m not going to go into detail in this post, so please read more at <a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://kb.vmware.com/s/article/55806"
 >https://kb.vmware.com/s/article/55806</a>.</p>
 <p>Secondly, you need Ansible installed and also the OpenManage Ansible Modules and the OpenManage Python SDK. I will not invent the wheel for this as jonamiki.com has got an excellent blog post about the entire procedure <a
   class="gblog-markdown__link"
+  target="_blank"
   href="http://jonamiki.com/2020/02/18/ansible-with-dell-poweredge-servers/"
 >http://jonamiki.com/2020/02/18/ansible-with-dell-poweredge-servers/</a>.</p>
 <p>Let&rsquo;s get down to it.</p>
@@ -427,7 +429,7 @@
             return;
         }
         var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "johnhenriksson" + '.disqus.com/embed.js';
+        s.src = '//' + "johnhenriksson-se" + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();

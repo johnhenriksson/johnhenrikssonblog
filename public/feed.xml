@@ -4,7 +4,7 @@
     <title>johnhenriksson.se</title>
             <link href="http://localhost:1313/" rel="alternate" type="text/html" title="html" />
             <link href="http://localhost:1313/feed.xml" rel="self" type="application/atom+xml" title="atom" />
-    <updated>2025-09-18T15:31:36+02:00</updated>
+    <updated>2025-09-18T19:35:52+02:00</updated>
     <id>http://localhost:1313/</id>
         <entry>
             <title>Block Youtube Shorts on Network</title>
@@ -13,12 +13,28 @@
             <published>2025-09-18T00:00:00+00:00</published>
             <updated>2025-09-18T00:00:00+00:00</updated>
             <content type="html">
-                &lt;p&gt;YT Shorts is an annoying, addictive video service that my kids love. I&amp;rsquo;ve been looking for a way to disable just the shorts feature as they are allowed to view &amp;ldquo;classic videos&amp;rdquo;. In my search I stumbled upon this guide, which I&amp;rsquo;ve extended on &lt;a
+                &lt;p&gt;YouTube Shorts is an annoying, addictive video service that my kids love. I&amp;rsquo;ve been looking for a way to disable just the shorts feature as they are allowed to view &amp;ldquo;classic videos&amp;rdquo;. In my search I stumbled upon this guide, which I&amp;rsquo;ve extended on &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452&#34;
 &gt;https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;What I learned is that the requests to YouTube have the parameter &amp;amp;ctier=SH so you need to intersect the traffic to YouTube and block these specific request, while allowing the rest.&lt;/p&gt;
-&lt;p&gt;In my setup I use pihole as DNS server and I use a CA certificate to sign the Nginx certificate. I need a CA as that is the only way to get the trust to iPhone/iPad.&lt;/p&gt;
+&lt;p&gt;What I learned is that the requests to YouTube have the parameter &lt;strong&gt;&amp;amp;ctier=SH&lt;/strong&gt; so you need to intersect the traffic to YouTube and block these specific request, while allowing the rest.&lt;/p&gt;
+&lt;p&gt;In my setup I use pihole as DNS server and I use a CA certificate to sign the Nginx certificate on a seperate Ubuntu server. I need a CA as that is the only way to get the trust to iPhone/iPad.&lt;/p&gt;
+&lt;p&gt;The flow looks something like this:&lt;/p&gt;
+&lt;p&gt;&lt;img
+  src=&#34;ytsh.png&#34;
+  alt=&#34;YT SH Diagram&#34;
+  
+/&gt;&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h1 id=&#34;pi-hole-configuration&#34;
+    &gt;
+        Pi-hole configuration
+    &lt;/h1&gt;
+    &lt;a data-clipboard-text=&#34;http://localhost:1313/blog/2025/block-youtube-shorts-on-network/#pi-hole-configuration&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Pi-hole configuration&#34; href=&#34;#pi-hole-configuration&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
 &lt;p&gt;First, I needed my DNS server to in a wildcard manner redirect *.googlevideos.com to my nginx server at 10.128.128.102&lt;/p&gt;
 &lt;p&gt;This is done through dnsmasq and if you go to Settings -&amp;gt; All Settings -&amp;gt; Miscellaneous -&amp;gt; misc.dnsmasq_lines and you add the line as below.&lt;/p&gt;
 &lt;p&gt;This way *.googlevideo.com will be redirected to 10.128.128.102&lt;/p&gt;
@@ -28,13 +44,22 @@
   alt=&#34;pihole screenshot&#34;
   
 /&gt;&lt;/p&gt;
-&lt;p&gt;First step done, now it&amp;rsquo;s time to move on to the ngnix server, hosted on Ubuntu.&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h1 id=&#34;set-up-certificates-and-nginx-proxy-on-ubuntu&#34;
+    &gt;
+        Set up certificates and nginx proxy on Ubuntu
+    &lt;/h1&gt;
+    &lt;a data-clipboard-text=&#34;http://localhost:1313/blog/2025/block-youtube-shorts-on-network/#set-up-certificates-and-nginx-proxy-on-ubuntu&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Set up certificates and nginx proxy on Ubuntu&#34; href=&#34;#set-up-certificates-and-nginx-proxy-on-ubuntu&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;First step done, now it&amp;rsquo;s time to move on to the ngnix server, hosted on Ubuntu 22.04.&lt;/p&gt;
 &lt;p&gt;We need SSL certificates as we will do a SSL proxy. I will generate a CA certificate and then sign the certificate needed for nginx, this as iPhones won&amp;rsquo;t accept to import and trust a standalone self-signed certificate.&lt;/p&gt;
 &lt;p&gt;First you need to install openssl&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install openssl
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We need a key for our CA&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;openssl genrsa -aes256 -out ca-key.pem &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next step, create a certificate for our CA, important to specify the days to 365 as Apple won&amp;rsquo;t accept any CA beyond 1 year&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next step, create a certificate for our CA, &lt;strong&gt;important to specify the days to 365&lt;/strong&gt; as Apple won&amp;rsquo;t accept any CA beyond 1 year&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;openssl req -new -x509 -sha256 -days &lt;span class=&#34;m&#34;&gt;365&lt;/span&gt; -key ca-key.pem -out ca.pem
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;The ca.pem file is the one you need to install in the trusted root store on your clients&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Time to create the cert needed for the nginx service, let&amp;rsquo;s start with the key file used for the cert&lt;/p&gt;
@@ -77,11 +102,24 @@
   alt=&#34;openssl screenshot&#34;
   
 /&gt;&lt;/p&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;configure-proxy&#34;
+    &gt;
+        Configure proxy
+    &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;http://localhost:1313/blog/2025/block-youtube-shorts-on-network/#configure-proxy&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Configure proxy&#34; href=&#34;#configure-proxy&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
 &lt;p&gt;Now it&amp;rsquo;s time to configure the nginx web proxy&lt;/p&gt;
 &lt;p&gt;To install nginx do&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt update
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt install nginx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Add this to /etc/nginx/nginx.conf (I&amp;rsquo;ve copied this from the excellent guide)&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Add this to /etc/nginx/nginx.conf - I&amp;rsquo;ve copied this from the excellent &lt;a
+  class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
+  href=&#34;https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452&#34;
+&gt;guide mentioned at the start&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Use DNS server to resolve IP address of a domain&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;resolver 8.8.8.8 8.8.4.4 &lt;span class=&#34;nv&#34;&gt;valid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;300s&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;resolver_timeout 5s&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
@@ -117,7 +155,16 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Restart nginx to apply the configuration &lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;service nginx restart
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now, every device using pihole as DNS will have YT shorts blocked.&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h1 id=&#34;conclusion&#34;
+    &gt;
+        Conclusion
+    &lt;/h1&gt;
+    &lt;a data-clipboard-text=&#34;http://localhost:1313/blog/2025/block-youtube-shorts-on-network/#conclusion&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Conclusion&#34; href=&#34;#conclusion&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;Now, every device using pihole as DNS will have YT shorts blocked.&lt;/p&gt;
 &lt;p&gt;Finally, I wanted only my kids devices to use pihole DNS, allowing me to control the traffic, both block unwanted sites through DNS lists and also redirect YouTube to my proxy.&lt;/p&gt;
 &lt;p&gt;What I&amp;rsquo;ve done is that I use Edgerouter X as router and in the DHCP configuration I edit optional parameters to the static mapping to leverage my pihole DNS for these clients.&lt;/p&gt;
 &lt;p&gt;Go to the config tree -&amp;gt; service -&amp;gt; DHCP-server -&amp;gt; shared-network-name -&amp;gt; (your network) -&amp;gt; subnet -&amp;gt; (your subnet) -&amp;gt; static mapping -&amp;gt; desired device&lt;/p&gt;
@@ -152,6 +199,7 @@
 &lt;p&gt;Image validation is an essential security measure that helps verify the authenticity and integrity of ONTAP images installed on your system. It ensures that the images have not been tampered with and are produced by NetApp. Upgrade image validation, introduced in ONTAP 9.3, allows you to validate images installed through image updates or automated updates. Boot-time image validation, available in ONTAP 9.4 and later versions, enables secure booting by validating the bootloader and preventing unauthorized modifications.&lt;/p&gt;
 &lt;p&gt;Documentation of &lt;strong&gt;cluster image validate&lt;/strong&gt; &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://docs.netapp.com/us-en/ontap-cli-9111/cluster-image-validate.html&#34;
 &gt;https://docs.netapp.com/us-en/ontap-cli-9111/cluster-image-validate.html&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
@@ -176,6 +224,7 @@
 &lt;p&gt;ONTAP supports various authentication methods to ensure secure access to the system. These methods include password authentication, SSL certificate authentication, SNMP community strings, and more. You can configure the authentication method based on your organization&amp;rsquo;s security policies and requirements. Additionally, ONTAP 9.11.1 introduces multi-admin verification (MAV), which allows certain operations to be executed only after approvals from designated administrators. MAV prevents unauthorized or undesirable changes by requiring multiple administrators to approve critical actions.&lt;/p&gt;
 &lt;p&gt;Documentation of &lt;strong&gt;Authentication and access control&lt;/strong&gt; &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://docs.netapp.com/us-en/ontap/authentication-access-control/index.html&#34;
 &gt;https://docs.netapp.com/us-en/ontap/authentication-access-control/index.html&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
@@ -190,6 +239,7 @@
 &lt;p&gt;ONTAP provides several password parameters to enforce password complexity and expiration policies. You can set minimum password length, alphanumeric requirements, special character requirements, and more. Additionally, you can configure password expiration time, account lockout policies, and password change delay. These parameters help ensure that user accounts adhere to your organization&amp;rsquo;s password security guidelines. By enforcing strong password policies, you can reduce the risk of unauthorized access and data breaches.&lt;/p&gt;
 &lt;p&gt;Documentation of &lt;strong&gt;Requirements for local user passwords&lt;/strong&gt; &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://docs.netapp.com/us-en/ontap/smb-admin/requirements-local-user-passwords-concept.html&#34;
 &gt;https://docs.netapp.com/us-en/ontap/smb-admin/requirements-local-user-passwords-concept.html&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
@@ -214,6 +264,7 @@
 &lt;p&gt;Login banners and MOTD are essential for communicating acceptable use policies and access restrictions to users. ONTAP allows you to modify the login banner and MOTD to display custom messages. The login banner is displayed before the authentication step during SSH and console device login, while the MOTD is displayed after successful login. You can customize these messages to inform users about system policies, security guidelines, and any other relevant information.&lt;/p&gt;
 &lt;p&gt;Documentation of &lt;strong&gt;Managing the banner&lt;/strong&gt; &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://docs.netapp.com/us-en/ontap/system-admin/manage-banner-reference.html&#34;
 &gt;https://docs.netapp.com/us-en/ontap/system-admin/manage-banner-reference.html&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
@@ -228,6 +279,7 @@
 &lt;p&gt;In this blog post, we discussed various security measures and best practices for NetApp ONTAP. By following these guidelines, you can ensure the confidentiality, integrity, and availability of your information system. From image validation to authentication methods and password parameters, each aspect plays a crucial role in securing your ONTAP deployment. Remember to regularly review and update your security settings to stay ahead of evolving threats. Stay secure and keep your data protected with NetApp ONTAP!&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Read more in the full technical report: &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://www.netapp.com/pdf.html?item=/media/10674-tr4569.pdf&#34;
 &gt;https://www.netapp.com/pdf.html?item=/media/10674-tr4569.pdf&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
@@ -316,6 +368,7 @@ tenants on the system&lt;/li&gt;
 &lt;/div&gt;
 &lt;p&gt;Login to &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://mysupport.netapp.com&#34;
 &gt;https://mysupport.netapp.com&lt;/a&gt;, click on Systems menu, choose Software Licenses and search by System Serial Number. Locate your CIFS_2 license and click on Check link in the Eligibility column&lt;/p&gt;
 &lt;p&gt;&lt;img
@@ -346,6 +399,7 @@ tenants on the system&lt;/li&gt;
 /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note: If you encounter any issues during the procedure, open a non-technical case for further assistance on &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://.netapp.com/site/help&#34;
 &gt;https://.netapp.com/site/help&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img
@@ -383,10 +437,12 @@ tenants on the system&lt;/li&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;ONTAP 9.10.1 and later licensing overview&lt;/strong&gt; &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://kb.netapp.com/onprem/ontap/os/ONTAP_9.10.1_and_later_licensing_overview&#34;
 &gt;https://kb.netapp.com/onprem/ontap/os/ONTAP_9.10.1_and_later_licensing_overview&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;How to get an ONTAP One license when the system has NLFs already&lt;/strong&gt; &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://kb.netapp.com/onprem/ontap/os/How_to_get_an_ONTAP_One_license_when_the_system_has_NLFs_already&#34;
 &gt;https://kb.netapp.com/onprem/ontap/os/How_to_get_an_ONTAP_One_license_when_the_system_has_NLFs_already&lt;/a&gt;&lt;/p&gt;
 
@@ -786,6 +842,7 @@ tenants on the system&lt;/li&gt;
 &lt;p&gt;You&amp;rsquo;ll want a friendly dashboard to overview your Trident environment quickly. This dashboard can be used to set up a TV in a NOC, or in your living room for that matter!&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;ve not created any dashboards myself. I recommend using the ready built examples from Yves Weisser. You find them on his &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://github.com/YvosOnTheHub/LabNetApp/tree/master/Kubernetes_v4/Scenarios/Scenario03/3_Grafana/Dashboards&#34;
 &gt;github&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;In this example, I use the dashboard &lt;code&gt;Trident_Dashboard_21.04.json&lt;/code&gt;.&lt;/p&gt;
@@ -807,18 +864,22 @@ tenants on the system&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://github.com/YvosOnTheHub/LabNetApp/tree/master/Kubernetes_v4/Scenarios/Scenario03&#34;
 &gt;Yves github repo&lt;/a&gt; have helped me alot in setting this up.&lt;/li&gt;
 &lt;li&gt;Kudos to the &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://github.com/prometheus-operator/prometheus-operator&#34;
 &gt;Prometheus Operator project on github&lt;/a&gt; that&amp;rsquo;s behind all the magic in this setup.&lt;/li&gt;
 &lt;li&gt;&lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://netapp-trident.readthedocs.io/en/stable-v21.07/kubernetes/operations/tasks/monitoring.html?highlight=monitor&#34;
 &gt;NetApp documentation on how to monitor Trident.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Want to learn more about Trident? Head over to &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://netapp.io/persistent-storage-provisioner-for-kubernetes/&#34;
 &gt;netapp.io&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -847,6 +908,7 @@ tenants on the system&lt;/li&gt;
 &lt;p&gt;ONTAP Select is the software-defined version of NetApp&amp;rsquo;s storage operating system ONTAP. Essentially it&amp;rsquo;s the same operating system that runs in the appliances AFF &amp;amp; FAS. With ONTAP Select, you can choose to deploy it on custom hardware, KVM, or VMware.&lt;/p&gt;
 &lt;p&gt;You can find ONTAP Select on the NetApp support site. Login to your NetApp SSO account on &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://mysupport.netapp.com&#34;
 &gt;https://mysupport.netapp.com&lt;/a&gt; and navigate to the ONTAP Select download page.&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
@@ -1021,6 +1083,7 @@ tenants on the system&lt;/li&gt;
 /&gt;&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m on my way to deploying Kubernetes the hard way, following &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://github.com/kelseyhightower/kubernetes-the-hard-way&#34;
 &gt;Kelsey Hightowers GitHub tutorial&lt;/a&gt;. The guide uses GCP for compute resources, but I want to utilize my home lab based on VMware, and I want to do it in a cloud fashion, with Infrastructure as Code. For this, I leverage tools like Packer and Terraform. In my previous post, I showed you how to build a VM template on vSphere with Packer. In this post, I&amp;rsquo;ll show you how to provision VMs from that template with Terraform.&lt;/p&gt;
 &lt;p&gt;The mission is to deploy three controller nodes and three worker nodes, a total of 6 VMs. All these VMs should be full clones of my Ubuntu template. I want to create a folder in vSphere called k8s and put all the VMs in it. Also, I want Terraform to give me the IP addresses of the VMs so I can easily connect and continue configuration.&lt;/p&gt;
@@ -1033,6 +1096,7 @@ tenants on the system&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I&amp;rsquo;ll use my Ubuntu 20.04 template built with Packer as the base for these VMs. If you haven&amp;rsquo;t read &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://virtjo.com/2020/build-ubuntu-vm-with-packer-on-vsphere/&#34;
 &gt;my previous post&lt;/a&gt;, please do so now.&lt;/p&gt;
 &lt;p&gt;The prepared template already has SSH keys, user accounts, settings, and so on set up. I highly recommend you set up your template as it makes things ALOT easier! When I need to rebuild my lab, I can generate a new VM within minutes, and everything is ready to connect once provisioned.&lt;/p&gt;
@@ -1044,6 +1108,7 @@ tenants on the system&lt;/li&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then create the script file as below. Besides disabling cloud-init, I&amp;rsquo;ve added the fix for the VMware customizations issue &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://kb.vmware.com/s/article/56409&#34;
 &gt;KB56409&lt;/a&gt;. This issue&amp;rsquo;s symptoms are network-related; vSphere fails to connect the network adapter without the hotfix.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#!/bin/bash
@@ -1067,6 +1132,7 @@ tenants on the system&lt;/li&gt;
 &lt;p&gt;As I&amp;rsquo;m a single user, I&amp;rsquo;ve chosen the local password manager Pass. With this tool, each password lives in a gpg encrypted file.&lt;/p&gt;
 &lt;p&gt;Install Pass on Mac with homebrew &lt;code&gt;brew install pass&lt;/code&gt;. If you need more info on how to install Pass, please visit the website &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://www.passwordstore.org&#34;
 &gt;passwordstore.org&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;With Pass, we can view the password file hierarchy:
@@ -1593,6 +1659,7 @@ tenants on the system&lt;/li&gt;
 &lt;p&gt;&lt;em&gt;Packer is an open-source tool for creating identical machine images for multiple platforms from a single source configuration. Packer is lightweight, runs on every major operating system, and is highly performant, creating machine images for multiple platforms in parallel. Packer does not replace configuration management like Chef or Puppet. In fact, when building images, Packer is able to use tools like Chef or Puppet to install software onto the image.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://www.packer.io/intro&#34;
 &gt;packer.io&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;So basically, you can use Packer to build VM&amp;rsquo;s from ISO&amp;rsquo;s based on code. Infrastructure as code, just how we like it. Also, it&amp;rsquo;s easy to implement in your CI/CD pipeline to go full hipster.&lt;/p&gt;
@@ -1609,6 +1676,7 @@ tenants on the system&lt;/li&gt;
 &lt;/div&gt;
 &lt;p&gt;I will not go through the installation process in this blog. Please visit the getting started guide on packer.io if you need help installing. &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://learn.hashicorp.com/tutorials/packer/getting-started-install&#34;
 &gt;You&amp;rsquo;ll find it here.&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
@@ -1631,6 +1699,7 @@ tenants on the system&lt;/li&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Also, you&amp;rsquo;ll need to upload an ISO to the vSphere datastore and edit the iso_url variable. I&amp;rsquo;ve uploaded the ISO to my NVME datastore, as you see here.&lt;/p&gt;
 &lt;p&gt;&lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://releases.ubuntu.com/20.10/ubuntu-20.10-live-server-amd64.iso&#34;
 &gt;Download Ubuntu Server ISO&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;iso_url&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;[NVME] ISO/ubuntu-20.04.1-live-server-amd64(1).iso&amp;#34;&lt;/span&gt;
@@ -1897,18 +1966,22 @@ tenants on the system&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;GitHub Repository:&lt;/strong&gt; &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://github.com/NetApp/trident&#34;
 &gt;https://github.com/NetApp/trident&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Trident Documentation:&lt;/strong&gt; &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://netapp-trident.readthedocs.io/en/stable-v19.01/index.html&#34;
 &gt;https://netapp-trident.readthedocs.io/en/stable-v19.01/index.html&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Using Trident with Kubernetes and ONTAP Lab:&lt;/strong&gt; &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://labondemand.netapp.com/lab/sl10556&#34;
 &gt;https://labondemand.netapp.com/lab/sl10556&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Trident on thePub:&lt;/strong&gt; &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://netapp.io/persistent-storage-provisioner-for-kubernetes/&#34;
 &gt;https://netapp.io/persistent-storage-provisioner-for-kubernetes/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -2039,10 +2112,12 @@ tenants on the system&lt;/li&gt;
 &lt;p&gt;Recently, I found a configuration issue on a VMware cluster running on DellEMC hardware. Initially, they were vulnerable to the L1 Terminal Fault CVE-2018-3646, to mitigate we disabled HT in the BIOS of the hosts. As time passed, VMware released software updates to mitigate these issues. We did install the patches, but the disabled HT stayed the same. When the problem came to light, I decided to put Ansible to work as I did not want to perform manual work on the entire cluster. So the adventure begins!&lt;/p&gt;
 &lt;p&gt;First, if you&amp;rsquo;re on an affected CPU architecture, Intel Skylake in our case, you need to verify that you&amp;rsquo;ve implemented the Side-Channel-Aware Scheduler in VMware. I&amp;rsquo;m not going to go into detail in this post, so please read more at &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://kb.vmware.com/s/article/55806&#34;
 &gt;https://kb.vmware.com/s/article/55806&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Secondly, you need Ansible installed and also the OpenManage Ansible Modules and the OpenManage Python SDK. I will not invent the wheel for this as jonamiki.com has got an excellent blog post about the entire procedure &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;http://jonamiki.com/2020/02/18/ansible-with-dell-poweredge-servers/&#34;
 &gt;http://jonamiki.com/2020/02/18/ansible-with-dell-poweredge-servers/&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s get down to it.&lt;/p&gt;
@@ -2678,6 +2753,7 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
     &gt;
         &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://blog.iops.ca/&#34;title=&#34;IOPS.ca&#34;
 &gt;IOPS.ca&lt;/a&gt;
     &lt;/h1&gt;
@@ -2691,6 +2767,7 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
     &gt;
         &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://whydoyoulikewafls.wordpress.com/&#34;title=&#34;Why do you like WAFLs?&#34;
 &gt;Why do you like WAFLs?&lt;/a&gt;
     &lt;/h1&gt;
@@ -2704,6 +2781,7 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
     &gt;
         &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://netapp.io/blog/&#34;title=&#34;thePub&#34;
 &gt;thePub&lt;/a&gt;
     &lt;/h1&gt;
@@ -2717,6 +2795,7 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
     &gt;
         &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://whyistheinternetbroken.wordpress.com/&#34;title=&#34;WHY IS THE INTERNET BROKEN?&#34;
 &gt;WHY IS THE INTERNET BROKEN?&lt;/a&gt;
     &lt;/h1&gt;
@@ -2736,6 +2815,7 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
 &lt;/div&gt;
 &lt;p&gt;I&amp;rsquo;m honestly quite embarrassed. After posting a link to this post on &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://www.reddit.com/r/netapp/comments/du9c3f/new_blog_post_top_5_netapp_blogs_to_follow_in_2019/&#34;
 &gt;Reddit&lt;/a&gt;, one excellent user, ragingpanda, made me aware that I only listed 4, not 5 links in this post.&lt;/p&gt;
 &lt;p&gt;&lt;img
@@ -2749,6 +2829,7 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
     &gt;
         &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;http://derschmitz.com/en/&#34;title=&#34;DerScmitz.com&#34;
 &gt;DerScmitz.com&lt;/a&gt;
     &lt;/h2&gt;
@@ -2761,6 +2842,7 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
     &gt;
         &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://words.ofsteiner.com/&#34;title=&#34;Words of Steine&#34;
 &gt;Words of Steiner&lt;/a&gt;
     &lt;/h2&gt;
@@ -2804,6 +2886,7 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
 &lt;p&gt;The second and last session was Pontus from Region Uppsala(Swedish healthcare region). He also did an exceptional presentation! He presented on their project, going from Hyper-V to VMware Cloud Foundation in less than a year. The main goal of the entire project from the start was to automate and provide self-service to the internal application owners. It quickly became much more than that, and they replaced the legacy converged infrastructure to modern hyper-converged vxRail systems. It was a fascinating story!&lt;/p&gt;
 &lt;p&gt;Lastly, VMware got us some pizza and beer! I met a bunch of new people that are facing the same daily challenges as me. The people in the VMware community are great! Hopefully, we will have another event soon!  And, please let me know what you would&amp;rsquo;ve liked to hear about next time! Send an email to &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;mailto:sweden@vmug.com&#34;
 &gt;sweden@vmug.com&lt;/a&gt; with your thoughts and ideas.&lt;/p&gt;
 &lt;p&gt;On a different note, I started this morning strong! I successfully renewed my VCP-DCV certification. This time I did the delta exam, consisting of 40 questions over 75 minutes. The exam was challenging in many areas, but I enjoyed the experience! I highly recommend that you renew your certification if you haven&amp;rsquo;t had the time yet.&lt;/p&gt;
@@ -2858,14 +2941,17 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
 &lt;p&gt;Overall, I&amp;rsquo;m satisfied with the questions and the exam. Here&amp;rsquo;s a list of resources for you to study if you&amp;rsquo;re planning to take the NS0-509 exam.&lt;/p&gt;
 &lt;p&gt;&lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://whydoyoulikewafls.wordpress.com/2019/07/31/zoning-for-cluster-storage-in-pictures/&#34;
 &gt;whydoyoulikewafls blog post about FC zoning&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;http://learningcenter.netapp.com/LC?ObjectType=Course&amp;amp;ObjectID=STRSW-WBT-SANFUND-REV01&#34;
 &gt;NetApp Learning Center - ONTAP SAN Fundamentals&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://www.netapp.com/us/services-support/university/certification/ncie-san.aspx#prepare_your_exam&#34;
 &gt;NetApp Exam Preperation Guide&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img
@@ -2886,6 +2972,7 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
                 &lt;p&gt;I am proud to announce myself as a VMUG Leader in the Sweden Community! The journey has just started, and we&amp;rsquo;ve planned our first event in October! I&amp;rsquo;m super excited to be a part of the community and to lead the local group forward!&lt;/p&gt;
 &lt;p&gt;&lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://community.vmug.com/events/event-description?CalendarEventKey=29b79084-1005-4052-89be-fb835f3e99ba&amp;amp;CommunityKey=6e0f4126-84fa-4b55-b411-a0560b93a58b&amp;amp;Home=%2fcommunities%2flocalcommunityhome&#34;
 &gt;Read more about the event at the community event page.&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Yesterday I received the welcome package from VMware, and I&amp;rsquo;m happy to share with you what I got!&lt;/p&gt;
@@ -2977,6 +3064,7 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
 &lt;p&gt;It&amp;rsquo;s recommended to always configure static IP-addresses on each service ensuring it retains IP after a reboot. When I say services in this sentence, I mean vCenter, ESXi, and other VMware products.&lt;/p&gt;
 &lt;p&gt;&lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://docs.vmware.com/en/VMware-vSphere/6.0/com.vmware.vsphere.upgrade.doc/GUID-1DD8E69C-4551-4C18-8698-7BFE01BEA8B7.html&#34;
 &gt;VMware - vSphere DNS requirements.&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The requirements cover two things that are important to configure, and it&amp;rsquo;s to have both forward and reverse lookup zones.&lt;/p&gt;
@@ -3003,6 +3091,7 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
 &lt;p&gt;Best practices from VMware is to have an authoritative NTP server as a time source, for example, your domain controllers. You also need to have these NTP servers configured to use a reliable source such as an on-premise GPS or one of the trusted external NTP pools. I use se.pool.ntp.org because I live in Sweden :)&lt;/p&gt;
 &lt;p&gt;&lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://blogs.vmware.com/vsphere/2018/07/timekeeping-within-esxi.html&#34;
 &gt;Interesting blog post from VMware about time in ESXi.&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
@@ -3018,6 +3107,7 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
 &lt;p&gt;The new vCenter appliance contains a certificate mode called &lt;em&gt;&amp;ldquo;Hybrid Mode&amp;rdquo;&lt;/em&gt; and that when you let the VMware Certificate Authority to be a subordinate certificate authority. That means that you only need to configure hybrid mode on the vCenter appliance and distribute the root certificate to your clients. The subordinate CA takes care of the rest; it signs new certificates to the ESXi hosts and other services inside vCenter.&lt;/p&gt;
 &lt;p&gt;&lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://docs.vmware.com/en/VMware-vSphere/6.0/com.vmware.vsphere.security.doc/GUID-5FE583A2-3737-4B62-A905-5BB38D479AE0.html&#34;
 &gt;VMware Docs - Use VMCA as an Intermediate Certificate Authority.&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
@@ -3032,6 +3122,7 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
 &lt;p&gt;Active Directory is(among other things) a service providing identity services. Identity service is the last requirement that we haven&amp;rsquo;t covered yet. Identity service and authentication are required to implement role-based access(RBAC), which is a way to grant different users different permissions. One example would be that you have a service desk group where users only should be able to use VM actions such as reboot, power on, off, and so on. It is possible with Active Directory combined with vSphere. It&amp;rsquo;s also possible with integrated users and other identity services, but Active Directory is the most commonly used.&lt;/p&gt;
 &lt;p&gt;&lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.vcsa.doc/GUID-08EA2F92-78A7-4EFF-880E-2B63ACC962F3.html&#34;
 &gt;VMware Docs - Join or Leave an Active Directory Domain.&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
@@ -3047,16 +3138,19 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
 &lt;p&gt;The minimum requirement would be two domain controllers, bot with AD, DNS &amp;amp; NTP but only one with CA. The CA is just a passive service that signs certificates, so it doesn&amp;rsquo;t need to be online all the time.&lt;/p&gt;
 &lt;p&gt;You would ideally put these two VM&amp;rsquo;s either in a management cluster or in the production cluster, but in either case, you would use anti-affinity rules. Anti-affinity rules keep virtual machines on different hosts all the time. &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.resmgmt.doc/GUID-FBE46165-065C-48C2-B775-7ADA87FF9A20.html&#34;
 &gt;Read more about that here.&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;In the best of worlds, I argue that a physical domain controller to be used alongside the virtual one. It&amp;rsquo;s one of the most critical servers that is running in your environment, and when you run it physically, you remove a bit of overhead. I&amp;rsquo;m not saying that there&amp;rsquo;s anything wrong running virtual machines, but a physical machine doesn&amp;rsquo;t have that extra layer of virtualization.&lt;/p&gt;
 &lt;p&gt;Here are some topics covering Active Directory in a virtualized environment.
 &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://support.microsoft.com/en-us/help/888794/things-to-consider-when-you-host-active-directory-domain-controllers-i&#34;
 &gt;Microsoft Docs - Virtualize Active Directory&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://www.youtube.com/watch?v=T5kKNBsJEJc&#34;
 &gt;VMworld US 2018 - Virtualize your Active Directory the Right Way! (VAP1898BU)&lt;/a&gt;&lt;/p&gt;
 
@@ -3071,6 +3165,7 @@ Let&amp;rsquo;s start by explaining what Infrastructure as Code(often referred t
             <content type="html">
                 &lt;p&gt;I followed Dave Ceddias awesome guide on how to get a Gatsbyjs blog up and running, &lt;a
   class=&#34;gblog-markdown__link&#34;
+  target=&#34;_blank&#34;
   href=&#34;https://daveceddia.com/start-blog-gatsby-netlify/&#34;
 &gt;you&amp;rsquo;ll find the guide here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;My requirements was a minimal blog that was easy to manage. I needed to be able to write in markup syntax and have code higlighting.&lt;/p&gt;

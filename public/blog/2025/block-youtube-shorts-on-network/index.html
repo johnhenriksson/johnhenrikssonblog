@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="generator" content="Hugo 0.150.0">
   <meta name="robots" content="index, follow" />
-  <meta name="description" content="YT Shorts is an annoying, addictive video service that my kids love. I’ve been looking for a way to disable just the shorts feature as they are allowed to view “classic videos”. In my search I stumbled upon this guide, which I’ve extended on https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452 What I learned is that the requests to YouTube have the parameter &amp;ctier=SH so you need to intersect the traffic to YouTube and block these specific request, while allowing the rest." />
+  <meta name="description" content="YouTube Shorts is an annoying, addictive video service that my kids love. I’ve been looking for a way to disable just the shorts feature as they are allowed to view “classic videos”. In my search I stumbled upon this guide, which I’ve extended on https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452 What I learned is that the requests to YouTube have the parameter &amp;ctier=SH so you need to intersect the traffic to YouTube and block these specific request, while allowing the rest." />
 
     <title>Block Youtube Shorts on Network | johnhenriksson.se</title>
 
@@ -36,7 +36,7 @@
     content="Block Youtube Shorts on Network"
   />
   <meta property="og:site_name" content="johnhenriksson.se" />
-  <meta property="og:description" content="YT Shorts is an annoying, addictive video service that my kids love. I’ve been looking for a way to disable just the shorts feature as they are allowed to view “classic videos”. In my search I stumbled upon this guide, which I’ve extended on https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452 What I learned is that the requests to YouTube have the parameter &amp;ctier=SH so you need to intersect the traffic to YouTube and block these specific request, while allowing the rest." />
+  <meta property="og:description" content="YouTube Shorts is an annoying, addictive video service that my kids love. I’ve been looking for a way to disable just the shorts feature as they are allowed to view “classic videos”. In my search I stumbled upon this guide, which I’ve extended on https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452 What I learned is that the requests to YouTube have the parameter &amp;ctier=SH so you need to intersect the traffic to YouTube and block these specific request, while allowing the rest." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/blog/2025/block-youtube-shorts-on-network/" />
 
@@ -53,7 +53,7 @@
 
   <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Block Youtube Shorts on Network" />
-  <meta name="twitter:description" content="YT Shorts is an annoying, addictive video service that my kids love. I’ve been looking for a way to disable just the shorts feature as they are allowed to view “classic videos”. In my search I stumbled upon this guide, which I’ve extended on https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452 What I learned is that the requests to YouTube have the parameter &amp;ctier=SH so you need to intersect the traffic to YouTube and block these specific request, while allowing the rest." />
+  <meta name="twitter:description" content="YouTube Shorts is an annoying, addictive video service that my kids love. I’ve been looking for a way to disable just the shorts feature as they are allowed to view “classic videos”. In my search I stumbled upon this guide, which I’ve extended on https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452 What I learned is that the requests to YouTube have the parameter &amp;ctier=SH so you need to intersect the traffic to YouTube and block these specific request, while allowing the rest." />
 
 <script type="application/ld+json">
   {
@@ -63,8 +63,8 @@
       "name": "Block Youtube Shorts on Network",
       "url" : "http://localhost:1313/blog/2025/block-youtube-shorts-on-network/",
       "headline": "Block Youtube Shorts on Network",
-      "description": "YT Shorts is an annoying, addictive video service that my kids love. I’ve been looking for a way to disable just the shorts feature as they are allowed to view “classic videos”. In my search I stumbled upon this guide, which I’ve extended on https:\/\/dealancer.medium.com\/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452 What I learned is that the requests to YouTube have the parameter \u0026ctier=SH so you need to intersect the traffic to YouTube and block these specific request, while allowing the rest.",
-      "wordCount" : "725",
+      "description": "YouTube Shorts is an annoying, addictive video service that my kids love. I’ve been looking for a way to disable just the shorts feature as they are allowed to view “classic videos”. In my search I stumbled upon this guide, which I’ve extended on https:\/\/dealancer.medium.com\/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452 What I learned is that the requests to YouTube have the parameter \u0026ctier=SH so you need to intersect the traffic to YouTube and block these specific request, while allowing the rest.",
+      "wordCount" : "755",
       "inLanguage": "en",
       "isFamilyFriendly": "true",
       "mainEntityOfPage": {
@@ -321,12 +321,28 @@
       
     </header>
     <section class="gblog-markdown">
-      <p>YT Shorts is an annoying, addictive video service that my kids love. I&rsquo;ve been looking for a way to disable just the shorts feature as they are allowed to view &ldquo;classic videos&rdquo;. In my search I stumbled upon this guide, which I&rsquo;ve extended on <a
+      <p>YouTube Shorts is an annoying, addictive video service that my kids love. I&rsquo;ve been looking for a way to disable just the shorts feature as they are allowed to view &ldquo;classic videos&rdquo;. In my search I stumbled upon this guide, which I&rsquo;ve extended on <a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452"
 >https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452</a> </p>
-<p>What I learned is that the requests to YouTube have the parameter &amp;ctier=SH so you need to intersect the traffic to YouTube and block these specific request, while allowing the rest.</p>
-<p>In my setup I use pihole as DNS server and I use a CA certificate to sign the Nginx certificate. I need a CA as that is the only way to get the trust to iPhone/iPad.</p>
+<p>What I learned is that the requests to YouTube have the parameter <strong>&amp;ctier=SH</strong> so you need to intersect the traffic to YouTube and block these specific request, while allowing the rest.</p>
+<p>In my setup I use pihole as DNS server and I use a CA certificate to sign the Nginx certificate on a seperate Ubuntu server. I need a CA as that is the only way to get the trust to iPhone/iPad.</p>
+<p>The flow looks something like this:</p>
+<p><img
+  src="ytsh.png"
+  alt="YT SH Diagram"
+  
+/></p>
+<div class="flex align-center gblog-post__anchorwrap">
+    <h1 id="pi-hole-configuration"
+    >
+        Pi-hole configuration
+    </h1>
+    <a data-clipboard-text="http://localhost:1313/blog/2025/block-youtube-shorts-on-network/#pi-hole-configuration" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Pi-hole configuration" href="#pi-hole-configuration">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
 <p>First, I needed my DNS server to in a wildcard manner redirect *.googlevideos.com to my nginx server at 10.128.128.102</p>
 <p>This is done through dnsmasq and if you go to Settings -&gt; All Settings -&gt; Miscellaneous -&gt; misc.dnsmasq_lines and you add the line as below.</p>
 <p>This way *.googlevideo.com will be redirected to 10.128.128.102</p>
@@ -336,13 +352,22 @@
   alt="pihole screenshot"
   
 /></p>
-<p>First step done, now it&rsquo;s time to move on to the ngnix server, hosted on Ubuntu.</p>
+<div class="flex align-center gblog-post__anchorwrap">
+    <h1 id="set-up-certificates-and-nginx-proxy-on-ubuntu"
+    >
+        Set up certificates and nginx proxy on Ubuntu
+    </h1>
+    <a data-clipboard-text="http://localhost:1313/blog/2025/block-youtube-shorts-on-network/#set-up-certificates-and-nginx-proxy-on-ubuntu" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Set up certificates and nginx proxy on Ubuntu" href="#set-up-certificates-and-nginx-proxy-on-ubuntu">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
+<p>First step done, now it&rsquo;s time to move on to the ngnix server, hosted on Ubuntu 22.04.</p>
 <p>We need SSL certificates as we will do a SSL proxy. I will generate a CA certificate and then sign the certificate needed for nginx, this as iPhones won&rsquo;t accept to import and trust a standalone self-signed certificate.</p>
 <p>First you need to install openssl</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install openssl
 </span></span></code></pre></div><p>We need a key for our CA</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">openssl genrsa -aes256 -out ca-key.pem <span class="m">4096</span>
-</span></span></code></pre></div><p>Next step, create a certificate for our CA, important to specify the days to 365 as Apple won&rsquo;t accept any CA beyond 1 year</p>
+</span></span></code></pre></div><p>Next step, create a certificate for our CA, <strong>important to specify the days to 365</strong> as Apple won&rsquo;t accept any CA beyond 1 year</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">openssl req -new -x509 -sha256 -days <span class="m">365</span> -key ca-key.pem -out ca.pem
 </span></span></code></pre></div><p><strong>The ca.pem file is the one you need to install in the trusted root store on your clients</strong></p>
 <p>Time to create the cert needed for the nginx service, let&rsquo;s start with the key file used for the cert</p>
@@ -385,11 +410,24 @@
   alt="openssl screenshot"
   
 /></p>
+<div class="flex align-center gblog-post__anchorwrap">
+    <h2 id="configure-proxy"
+    >
+        Configure proxy
+    </h2>
+    <a data-clipboard-text="http://localhost:1313/blog/2025/block-youtube-shorts-on-network/#configure-proxy" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Configure proxy" href="#configure-proxy">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
 <p>Now it&rsquo;s time to configure the nginx web proxy</p>
 <p>To install nginx do</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt update
 </span></span><span class="line"><span class="cl">apt install nginx
-</span></span></code></pre></div><p>Add this to /etc/nginx/nginx.conf (I&rsquo;ve copied this from the excellent guide)</p>
+</span></span></code></pre></div><p>Add this to /etc/nginx/nginx.conf - I&rsquo;ve copied this from the excellent <a
+  class="gblog-markdown__link"
+  target="_blank"
+  href="https://dealancer.medium.com/blocking-youyube-shorts-with-nginx-and-nextdns-c2ccb0ff5452"
+>guide mentioned at the start</a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Use DNS server to resolve IP address of a domain</span>
 </span></span><span class="line"><span class="cl">resolver 8.8.8.8 8.8.4.4 <span class="nv">valid</span><span class="o">=</span>300s<span class="p">;</span>
 </span></span><span class="line"><span class="cl">resolver_timeout 5s<span class="p">;</span>
@@ -425,7 +463,16 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></div><p>Restart nginx to apply the configuration </p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">service nginx restart
-</span></span></code></pre></div><p>Now, every device using pihole as DNS will have YT shorts blocked.</p>
+</span></span></code></pre></div><div class="flex align-center gblog-post__anchorwrap">
+    <h1 id="conclusion"
+    >
+        Conclusion
+    </h1>
+    <a data-clipboard-text="http://localhost:1313/blog/2025/block-youtube-shorts-on-network/#conclusion" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Conclusion" href="#conclusion">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
+<p>Now, every device using pihole as DNS will have YT shorts blocked.</p>
 <p>Finally, I wanted only my kids devices to use pihole DNS, allowing me to control the traffic, both block unwanted sites through DNS lists and also redirect YouTube to my proxy.</p>
 <p>What I&rsquo;ve done is that I use Edgerouter X as router and in the DHCP configuration I edit optional parameters to the static mapping to leverage my pihole DNS for these clients.</p>
 <p>Go to the config tree -&gt; service -&gt; DHCP-server -&gt; shared-network-name -&gt; (your network) -&gt; subnet -&gt; (your subnet) -&gt; static mapping -&gt; desired device</p>
@@ -453,7 +500,7 @@
             return;
         }
         var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "johnhenriksson" + '.disqus.com/embed.js';
+        s.src = '//' + "johnhenriksson-se" + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();

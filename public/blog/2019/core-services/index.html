@@ -357,6 +357,7 @@
 <p>It&rsquo;s recommended to always configure static IP-addresses on each service ensuring it retains IP after a reboot. When I say services in this sentence, I mean vCenter, ESXi, and other VMware products.</p>
 <p><a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://docs.vmware.com/en/VMware-vSphere/6.0/com.vmware.vsphere.upgrade.doc/GUID-1DD8E69C-4551-4C18-8698-7BFE01BEA8B7.html"
 >VMware - vSphere DNS requirements.</a></p>
 <p>The requirements cover two things that are important to configure, and it&rsquo;s to have both forward and reverse lookup zones.</p>
@@ -383,6 +384,7 @@
 <p>Best practices from VMware is to have an authoritative NTP server as a time source, for example, your domain controllers. You also need to have these NTP servers configured to use a reliable source such as an on-premise GPS or one of the trusted external NTP pools. I use se.pool.ntp.org because I live in Sweden :)</p>
 <p><a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://blogs.vmware.com/vsphere/2018/07/timekeeping-within-esxi.html"
 >Interesting blog post from VMware about time in ESXi.</a></p>
 <div class="flex align-center gblog-post__anchorwrap">
@@ -398,6 +400,7 @@
 <p>The new vCenter appliance contains a certificate mode called <em>&ldquo;Hybrid Mode&rdquo;</em> and that when you let the VMware Certificate Authority to be a subordinate certificate authority. That means that you only need to configure hybrid mode on the vCenter appliance and distribute the root certificate to your clients. The subordinate CA takes care of the rest; it signs new certificates to the ESXi hosts and other services inside vCenter.</p>
 <p><a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://docs.vmware.com/en/VMware-vSphere/6.0/com.vmware.vsphere.security.doc/GUID-5FE583A2-3737-4B62-A905-5BB38D479AE0.html"
 >VMware Docs - Use VMCA as an Intermediate Certificate Authority.</a></p>
 <div class="flex align-center gblog-post__anchorwrap">
@@ -412,6 +415,7 @@
 <p>Active Directory is(among other things) a service providing identity services. Identity service is the last requirement that we haven&rsquo;t covered yet. Identity service and authentication are required to implement role-based access(RBAC), which is a way to grant different users different permissions. One example would be that you have a service desk group where users only should be able to use VM actions such as reboot, power on, off, and so on. It is possible with Active Directory combined with vSphere. It&rsquo;s also possible with integrated users and other identity services, but Active Directory is the most commonly used.</p>
 <p><a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.vcsa.doc/GUID-08EA2F92-78A7-4EFF-880E-2B63ACC962F3.html"
 >VMware Docs - Join or Leave an Active Directory Domain.</a></p>
 <div class="flex align-center gblog-post__anchorwrap">
@@ -427,16 +431,19 @@
 <p>The minimum requirement would be two domain controllers, bot with AD, DNS &amp; NTP but only one with CA. The CA is just a passive service that signs certificates, so it doesn&rsquo;t need to be online all the time.</p>
 <p>You would ideally put these two VM&rsquo;s either in a management cluster or in the production cluster, but in either case, you would use anti-affinity rules. Anti-affinity rules keep virtual machines on different hosts all the time. <a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.resmgmt.doc/GUID-FBE46165-065C-48C2-B775-7ADA87FF9A20.html"
 >Read more about that here.</a></p>
 <p>In the best of worlds, I argue that a physical domain controller to be used alongside the virtual one. It&rsquo;s one of the most critical servers that is running in your environment, and when you run it physically, you remove a bit of overhead. I&rsquo;m not saying that there&rsquo;s anything wrong running virtual machines, but a physical machine doesn&rsquo;t have that extra layer of virtualization.</p>
 <p>Here are some topics covering Active Directory in a virtualized environment.
 <a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://support.microsoft.com/en-us/help/888794/things-to-consider-when-you-host-active-directory-domain-controllers-i"
 >Microsoft Docs - Virtualize Active Directory</a></p>
 <p><a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://www.youtube.com/watch?v=T5kKNBsJEJc"
 >VMworld US 2018 - Virtualize your Active Directory the Right Way! (VAP1898BU)</a></p>
 
@@ -455,7 +462,7 @@
             return;
         }
         var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "johnhenriksson" + '.disqus.com/embed.js';
+        s.src = '//' + "johnhenriksson-se" + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();

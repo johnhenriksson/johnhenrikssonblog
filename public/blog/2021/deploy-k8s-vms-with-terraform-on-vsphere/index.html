@@ -333,6 +333,7 @@
 /></p>
 <p>I&rsquo;m on my way to deploying Kubernetes the hard way, following <a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://github.com/kelseyhightower/kubernetes-the-hard-way"
 >Kelsey Hightowers GitHub tutorial</a>. The guide uses GCP for compute resources, but I want to utilize my home lab based on VMware, and I want to do it in a cloud fashion, with Infrastructure as Code. For this, I leverage tools like Packer and Terraform. In my previous post, I showed you how to build a VM template on vSphere with Packer. In this post, I&rsquo;ll show you how to provision VMs from that template with Terraform.</p>
 <p>The mission is to deploy three controller nodes and three worker nodes, a total of 6 VMs. All these VMs should be full clones of my Ubuntu template. I want to create a folder in vSphere called k8s and put all the VMs in it. Also, I want Terraform to give me the IP addresses of the VMs so I can easily connect and continue configuration.</p>
@@ -345,6 +346,7 @@
 </ul>
 <p>I&rsquo;ll use my Ubuntu 20.04 template built with Packer as the base for these VMs. If you haven&rsquo;t read <a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://virtjo.com/2020/build-ubuntu-vm-with-packer-on-vsphere/"
 >my previous post</a>, please do so now.</p>
 <p>The prepared template already has SSH keys, user accounts, settings, and so on set up. I highly recommend you set up your template as it makes things ALOT easier! When I need to rebuild my lab, I can generate a new VM within minutes, and everything is ready to connect once provisioned.</p>
@@ -356,6 +358,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">]</span>
 </span></span></code></pre></div><p>Then create the script file as below. Besides disabling cloud-init, I&rsquo;ve added the fix for the VMware customizations issue <a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://kb.vmware.com/s/article/56409"
 >KB56409</a>. This issue&rsquo;s symptoms are network-related; vSphere fails to connect the network adapter without the hotfix.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
@@ -379,6 +382,7 @@
 <p>As I&rsquo;m a single user, I&rsquo;ve chosen the local password manager Pass. With this tool, each password lives in a gpg encrypted file.</p>
 <p>Install Pass on Mac with homebrew <code>brew install pass</code>. If you need more info on how to install Pass, please visit the website <a
   class="gblog-markdown__link"
+  target="_blank"
   href="https://www.passwordstore.org"
 >passwordstore.org</a></p>
 <p>With Pass, we can view the password file hierarchy:
@@ -897,7 +901,7 @@
             return;
         }
         var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "johnhenriksson" + '.disqus.com/embed.js';
+        s.src = '//' + "johnhenriksson-se" + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
