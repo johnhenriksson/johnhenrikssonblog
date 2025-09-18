@@ -1,6 +1,6 @@
-baseURL = 'https://nerd-geek.com/'
+baseURL = 'https://johnhenriksson.se/'
 languageCode = 'en-us'
-title = 'Nerd-Geek.com'
+title = 'johnhenriksson.se'
 theme = 'hugo-geekblog'
 sectionPagesMenu = 'main'
 googleAnalytics = "G-RHTJKJXTF6"
@@ -24,7 +24,7 @@ disablePathToLower = true
 
 [services]
   [services.disqus]
-    shortname = 'nerd-geek'
+    shortname = 'johnhenriksson'
 
 [taxonomies]
   author = "authors"

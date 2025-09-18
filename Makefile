@@ -1,5 +1,5 @@
 # Please change the theme version to the latest release version.
-THEME_VERSION := v0.26.1
+THEME_VERSION := v2.0.3
 THEME := hugo-geekblog
 BASEDIR := ./
 THEMEDIR := $(BASEDIR)/themes
