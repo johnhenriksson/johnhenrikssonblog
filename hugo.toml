@@ -3,7 +3,7 @@ languageCode = 'en-us'
 title = 'johnhenriksson.se'
 theme = 'hugo-geekblog'
 sectionPagesMenu = 'main'
-googleAnalytics = "G-RHTJKJXTF6"
+googleAnalytics = "G-577F6CRZMN"
 
 
 pluralizeListTitles = false
