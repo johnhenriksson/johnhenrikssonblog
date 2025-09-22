@@ -129,7 +129,7 @@
 
     
 
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-RHTJKJXTF6"></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-577F6CRZMN"></script>
       <script>
         var doNotTrack = false;
         if ( false ) {
@@ -140,7 +140,7 @@
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-RHTJKJXTF6');
+          gtag('config', 'G-577F6CRZMN');
         }
       </script>
   </head>
@@ -276,6 +276,66 @@
   
 
   
+  
+    <article class="gblog-post">
+      <header class="gblog-post__header">
+        <h1 class="gblog-post__title">
+          <a href="/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/">Build Ubuntu 24.04 VM on vSphere with Packer</a>
+        </h1>
+      </header>
+
+      <section class="gblog-markdown">
+        <p>A couple of years ago I did a post on how to use Packer to build Ubuntu 20.04 VM on vSphere. You can find it <a
+  class="gblog-markdown__link"
+  target="_blank"
+  href="https://johnhenriksson.se/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/"
+>here</a>. It go a lot of reads and now I&rsquo;ve made an update focused on 24.04 and also changed from yaml to hcl code. I did this because I&rsquo;m on a mission to move VM&rsquo;s from an old KVM host to vSphere, instead of using some shady migration tool I will rebuild the VM&rsquo;s and move the configuration files. I want to free the KVM host to install Proxmox instead, more on that in a later post.</p>
+      </section>
+      <div class="gblog-post__readmore">
+        
+          <a
+            class="flex-inline align-center fake-link"
+            title="Read full post"
+            href="/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/"
+          >
+            Read full post
+            <i class="gblog-icon">gblog_arrow_right</i>
+          </a>
+        
+      </div>
+
+      <footer class="gblog-post__footer">
+        <div class="flex flex-wrap align-center gblog-post__meta">
+          <span class="flex align-center no-wrap gblog-post__meta--update">
+  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
+  <span class="gblog-post__tag">
+    <time datetime="2025-09-21T00:00:00Z">
+      
+      Sep 21, 2025
+    </time>
+  </span>
+</span>
+
+<span class="flex align-center no-wrap gblog-post__meta--readtime">
+  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
+  <span class="gblog-post__tag">6 min read</span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+      </footer>
+    </article>
   
     <article class="gblog-post">
       <header class="gblog-post__header">
@@ -828,67 +888,6 @@
 <span class="flex align-center no-wrap gblog-post__meta--readtime">
   <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
   <span class="gblog-post__tag">2 min read</span>
-</span>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-      </footer>
-    </article>
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
-          <a href="/blog/2020/enable-ht-ansible-dellemc-vmware/">Enable Hyperthreading in BIOS with Ansible on VMware hosts</a>
-        </h1>
-      </header>
-
-      <section class="gblog-markdown">
-        <p><img
-  src="./ansible-poweredge.jpg"
-  alt="Ansible PowerEdge Modules"
-  
-/></p>
-<p>Recently, I found a configuration issue on a VMware cluster running on DellEMC hardware. Initially, they were vulnerable to the L1 Terminal Fault CVE-2018-3646, to mitigate we disabled HT in the BIOS of the hosts. As time passed, VMware released software updates to mitigate these issues. We did install the patches, but the disabled HT stayed the same. When the problem came to light, I decided to put Ansible to work as I did not want to perform manual work on the entire cluster. So the adventure begins!</p>
-      </section>
-      <div class="gblog-post__readmore">
-        
-          <a
-            class="flex-inline align-center fake-link"
-            title="Read full post"
-            href="/blog/2020/enable-ht-ansible-dellemc-vmware/"
-          >
-            Read full post
-            <i class="gblog-icon">gblog_arrow_right</i>
-          </a>
-        
-      </div>
-
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
-  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
-  <span class="gblog-post__tag">
-    <time datetime="2020-03-22T00:00:00Z">
-      
-      Mar 22, 2020
-    </time>
-  </span>
-</span>
-
-<span class="flex align-center no-wrap gblog-post__meta--readtime">
-  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">3 min read</span>
 </span>
 
 

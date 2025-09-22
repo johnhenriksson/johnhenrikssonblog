@@ -12,9 +12,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="generator" content="Hugo 0.150.0">
   <meta name="robots" content="index, follow" />
-  <meta name="description" content="Packer is an open-source tool for creating virtual machine images with the help of code. In this post I&#39;ll show you how I use Packer to build my Ubuntu VM template in vSphere." />
+  <meta name="description" content="A couple of years ago I did a post on how to use Packer to build Ubuntu 20.04 VM on vSphere. You can find it here. It go a lot of reads and now I’ve made an update focused on 24.04 and also changed from yaml to hcl code. I did this because I’m on a mission to move VM’s from an old KVM host to vSphere, instead of using some shady migration tool I will rebuild the VM’s and move the configuration files. I want to free the KVM host to install Proxmox instead, more on that in a later post." />
 
-    <title>Build Ubuntu 20.04 VM on vSphere with Packer | johnhenriksson.se</title>
+    <title>Build Ubuntu 24.04 VM on vSphere with Packer | johnhenriksson.se</title>
 
     
 <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
@@ -33,54 +33,51 @@
     
   <meta
     property="og:title"
-    content="Build Ubuntu 20.04 VM on vSphere with Packer"
+    content="Build Ubuntu 24.04 VM on vSphere with Packer"
   />
   <meta property="og:site_name" content="johnhenriksson.se" />
-  <meta property="og:image" content="http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/featured_hu_6301e166135403af.png" />
-  <meta property="og:description" content="Packer is an open-source tool for creating virtual machine images with the help of code. In this post I&#39;ll show you how I use Packer to build my Ubuntu VM template in vSphere." />
+  <meta property="og:description" content="A couple of years ago I did a post on how to use Packer to build Ubuntu 20.04 VM on vSphere. You can find it here. It go a lot of reads and now I’ve made an update focused on 24.04 and also changed from yaml to hcl code. I did this because I’m on a mission to move VM’s from an old KVM host to vSphere, instead of using some shady migration tool I will rebuild the VM’s and move the configuration files. I want to free the KVM host to install Proxmox instead, more on that in a later post." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/" />
+<meta property="og:url" content="http://localhost:1313/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/" />
 
 <meta property="article:section" content="Blog" />
     <meta
       property="article:published_time"
-      content="2020-12-18T00:00:00+00:00"
+      content="2025-09-21T00:00:00+00:00"
     />
     <meta
       property="article:modified_time"
-      content="2020-12-18T00:00:00+00:00"
+      content="2025-09-21T00:00:00+00:00"
     />
 
 
-  <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Build Ubuntu 20.04 VM on vSphere with Packer" />
-  <meta property="twitter:image" content="http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/featured_hu_6301e166135403af.png" />
-  <meta name="twitter:description" content="Packer is an open-source tool for creating virtual machine images with the help of code. In this post I&#39;ll show you how I use Packer to build my Ubuntu VM template in vSphere." />
+  <meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Build Ubuntu 24.04 VM on vSphere with Packer" />
+  <meta name="twitter:description" content="A couple of years ago I did a post on how to use Packer to build Ubuntu 20.04 VM on vSphere. You can find it here. It go a lot of reads and now I’ve made an update focused on 24.04 and also changed from yaml to hcl code. I did this because I’m on a mission to move VM’s from an old KVM host to vSphere, instead of using some shady migration tool I will rebuild the VM’s and move the configuration files. I want to free the KVM host to install Proxmox instead, more on that in a later post." />
 
 <script type="application/ld+json">
   {
       "@context": "http://schema.org",
       "@type": "BlogPosting",
       "articleSection": "Blog",
-      "name": "Build Ubuntu 20.04 VM on vSphere with Packer",
-      "url" : "http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/",
-      "headline": "Build Ubuntu 20.04 VM on vSphere with Packer",
-      "description": "Packer is an open-source tool for creating virtual machine images with the help of code. In this post I\u0027ll show you how I use Packer to build my Ubuntu VM template in vSphere.",
-      "thumbnailUrl": "http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/featured_hu_6301e166135403af.png",
-      "wordCount" : "826",
+      "name": "Build Ubuntu 24.04 VM on vSphere with Packer",
+      "url" : "http://localhost:1313/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/",
+      "headline": "Build Ubuntu 24.04 VM on vSphere with Packer",
+      "description": "A couple of years ago I did a post on how to use Packer to build Ubuntu 20.04 VM on vSphere. You can find it here. It go a lot of reads and now I’ve made an update focused on 24.04 and also changed from yaml to hcl code. I did this because I’m on a mission to move VM’s from an old KVM host to vSphere, instead of using some shady migration tool I will rebuild the VM’s and move the configuration files. I want to free the KVM host to install Proxmox instead, more on that in a later post.",
+      "wordCount" : "1244",
       "inLanguage": "en",
       "isFamilyFriendly": "true",
       "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/"
+          "@id": "http://localhost:1313/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/"
       },
       "author" : [
       ],
       "copyrightHolder" : "johnhenriksson.se",
-      "copyrightYear" : "2020",
-      "dateCreated": "2020-12-18T00:00:00.00Z",
-      "datePublished": "2020-12-18T00:00:00.00Z",
-      "dateModified": "2020-12-18T00:00:00.00Z",
+      "copyrightYear" : "2025",
+      "dateCreated": "2025-09-21T00:00:00.00Z",
+      "datePublished": "2025-09-21T00:00:00.00Z",
+      "dateModified": "2025-09-21T00:00:00.00Z",
       "publisher":{
           "@type":"Organization",
           "name": "johnhenriksson.se",
@@ -165,7 +162,7 @@
   href="/custom.css"
   media="all"
 />
-  <link href="http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/" rel="canonical" type="text/html" />
+  <link href="http://localhost:1313/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/" rel="canonical" type="text/html" />
     <link href="http://localhost:1313/feed.xml" rel="alternate" type="application/atom+xml" title="johnhenriksson.se atom Feed" />
 
 <!-- Made with Geekblog theme https://github.com/thegeeklab/hugo-geekblog -->
@@ -317,32 +314,34 @@
     <header class="gblog-post__header">
       
       
-        
-      
 
 
-      <h1 class="gblog-post__title">Build Ubuntu 20.04 VM on vSphere with Packer</h1>
+      <h1 class="gblog-post__title">Build Ubuntu 24.04 VM on vSphere with Packer</h1>
 
       
     </header>
     <section class="gblog-markdown">
-      <p>I have a home lab in my basement for learning purposes and to be able to create useful content on this blog. My next mission is to learn more about Kubernetes and advance my knowledge of IaC and Linux. For this, I need a consistent way to build and deploy Ubuntu VM&rsquo;s. In this post, I&rsquo;ll show you how I use Packer to create VM templates on vSphere.</p>
+      <p>A couple of years ago I did a post on how to use Packer to build Ubuntu 20.04 VM on vSphere. You can find it <a
+  class="gblog-markdown__link"
+  target="_blank"
+  href="https://johnhenriksson.se/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/"
+>here</a>. It go a lot of reads and now I&rsquo;ve made an update focused on 24.04 and also changed from yaml to hcl code. I did this because I&rsquo;m on a mission to move VM&rsquo;s from an old KVM host to vSphere, instead of using some shady migration tool I will rebuild the VM&rsquo;s and move the configuration files. I want to free the KVM host to install Proxmox instead, more on that in a later post.</p>
 <div class="flex align-center gblog-post__anchorwrap">
     <h1 id="what-is-packer"
     >
         What is Packer?
     </h1>
-    <a data-clipboard-text="http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/#what-is-packer" class="gblog-post__anchor clip flex align-center" aria-label="Anchor What is Packer?" href="#what-is-packer">
+    <a data-clipboard-text="http://localhost:1313/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/#what-is-packer" class="gblog-post__anchor clip flex align-center" aria-label="Anchor What is Packer?" href="#what-is-packer">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
 <p>Let&rsquo;s hear it from the source:</p>
-<p><em>Packer is an open-source tool for creating identical machine images for multiple platforms from a single source configuration. Packer is lightweight, runs on every major operating system, and is highly performant, creating machine images for multiple platforms in parallel. Packer does not replace configuration management like Chef or Puppet. In fact, when building images, Packer is able to use tools like Chef or Puppet to install software onto the image.</em></p>
+<p><em>Packer is a community tool for creating identical machine images for multiple platforms from a single source configuration. Packer is lightweight, runs on every major operating system, and is highly performant, creating machine images for multiple platforms in parallel. Packer does not replace configuration management like Chef or Puppet. In fact, when building images, Packer is able to use tools like Chef or Puppet to install software onto the image.</em></p>
 <p><a
   class="gblog-markdown__link"
   target="_blank"
-  href="https://www.packer.io/intro"
->packer.io</a></p>
+  href="https://developer.hashicorp.com/packer/docs/intro"
+>Introduction to Packer</a></p>
 <p>So basically, you can use Packer to build VM&rsquo;s from ISO&rsquo;s based on code. Infrastructure as code, just how we like it. Also, it&rsquo;s easy to implement in your CI/CD pipeline to go full hipster.</p>
 <p>Packer builds the VM from the desired ISO and is also able to perform advanced provision tasks. Also, I&rsquo;m able to inject my SSH public key to enable key-based authentication on the template.</p>
 <p>I&rsquo;ll later use this VM template as a source when deploying infrastructure resources with Terraform, but more on that in another blog post.</p>
@@ -351,45 +350,53 @@
     >
         Install Packer
     </h1>
-    <a data-clipboard-text="http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/#install-packer" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Install Packer" href="#install-packer">
+    <a data-clipboard-text="http://localhost:1313/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/#install-packer" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Install Packer" href="#install-packer">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
 <p>I will not go through the installation process in this blog. Please visit the getting started guide on packer.io if you need help installing. <a
   class="gblog-markdown__link"
   target="_blank"
-  href="https://learn.hashicorp.com/tutorials/packer/getting-started-install"
+  href="https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli"
 >You&rsquo;ll find it here.</a></p>
 <div class="flex align-center gblog-post__anchorwrap">
     <h1 id="create-the-build"
     >
         Create the Build
     </h1>
-    <a data-clipboard-text="http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/#create-the-build" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Create the Build" href="#create-the-build">
+    <a data-clipboard-text="http://localhost:1313/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/#create-the-build" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Create the Build" href="#create-the-build">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
 <p>In my home lab, I&rsquo;m now able to build a fresh template in ~12 minutes. That&rsquo;s pretty good!</p>
-<p>You&rsquo;ll need these files. The .json file is where you configure settings for Packer to build and provision the VM, connect to vSphere, and so on. The user-data and meta-data files are used for unattended installation of Ubuntu. Although only the user-data files contain information, both must be present. Packer uses these files and mounts them as CDROM&rsquo;s to the vSphere guest VM.</p>
+<p>You&rsquo;ll need these files. The <code>ubuntu.pkr.hcl</code> file is where you configure settings for Packer to build and provision the VM, connect to vSphere, and so on. The <code>ubuntu.auto.pkrvars.hcl</code> contains environment specific settings such as vCenter password, so keep it well guarded. The <code>user-data</code> and <code>meta-data</code> files are used for unattended installation of Ubuntu. Although only the user-data files contain information, both must be present. Packer uses these files and mounts them as CDROM&rsquo;s to the vSphere guest VM.</p>
+<p>As a bonus I&rsquo;ve added <code>docker-engine.sh</code>, a shell script to be used as a Packer provisioner to install docker engine on my template, as all my VM&rsquo;s use this to run containers.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">❯ tree .
 </span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── docker-engine.sh
 </span></span><span class="line"><span class="cl">├── http
-</span></span><span class="line"><span class="cl">│   ├── meta-data
-</span></span><span class="line"><span class="cl">│   └── user-data
-</span></span><span class="line"><span class="cl">└── ubuntu-2004.json
-</span></span></code></pre></div><p>Also, you&rsquo;ll need to upload an ISO to the vSphere datastore and edit the iso_url variable. I&rsquo;ve uploaded the ISO to my NVME datastore, as you see here.</p>
+</span></span><span class="line"><span class="cl">│   ├── meta-data
+</span></span><span class="line"><span class="cl">│   └── user-data
+</span></span><span class="line"><span class="cl">├── ubuntu.auto.pkrvars.hcl
+</span></span><span class="line"><span class="cl">├── ubuntu.pkr.hcl
+</span></span><span class="line"><span class="cl">└── variables.pkr.hcl
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">2</span> directories, <span class="m">6</span> files
+</span></span></code></pre></div><p>Also, you&rsquo;ll need to upload an ISO to the vSphere datastore and edit the iso_url variable. I&rsquo;ve uploaded the ISO to my datastore2 datastore, as you see here.</p>
 <p><a
   class="gblog-markdown__link"
   target="_blank"
-  href="https://releases.ubuntu.com/20.10/ubuntu-20.10-live-server-amd64.iso"
+  href="https://ubuntu.com/download/server"
 >Download Ubuntu Server ISO</a></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;iso_url&#34;</span><span class="err">:</span> <span class="s2">&#34;[NVME] ISO/ubuntu-20.04.1-live-server-amd64(1).iso&#34;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="c1">#ubuntu.auto.pkrvars.hcl
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="n">iso_url</span> <span class="o">=</span> <span class="s2">&#34;[datastore2] ISO/ubuntu-24.04.3-live-server-amd64.iso&#34;</span>
 </span></span></code></pre></div><div class="flex align-center gblog-post__anchorwrap">
     <h2 id="important-code-snippets-in-the-build-file"
     >
         Important code snippets in the build file
     </h2>
-    <a data-clipboard-text="http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/#important-code-snippets-in-the-build-file" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Important code snippets in the build file" href="#important-code-snippets-in-the-build-file">
+    <a data-clipboard-text="http://localhost:1313/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/#important-code-snippets-in-the-build-file" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Important code snippets in the build file" href="#important-code-snippets-in-the-build-file">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -398,20 +405,21 @@
     >
         SSH Timeout
     </h3>
-    <a data-clipboard-text="http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/#ssh-timeout" class="gblog-post__anchor clip flex align-center" aria-label="Anchor SSH Timeout" href="#ssh-timeout">
+    <a data-clipboard-text="http://localhost:1313/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/#ssh-timeout" class="gblog-post__anchor clip flex align-center" aria-label="Anchor SSH Timeout" href="#ssh-timeout">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
 <p>So, I had some trouble with Packer where it failed to connect to SSH. The issue is that SSH is present when Ubuntu performs the unattended installation, then Ubuntu reboots and performs the cloud-init part and configures my user. Packer thinks the VM is ready on the first SSH connectivity.</p>
 <p>Be sure to add this snippet to workaround the issue.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;ssh_timeout&#34;</span><span class="err">:</span> <span class="s2">&#34;20m&#34;</span><span class="err">,</span>
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;ssh_handshake_attempts&#34;</span><span class="err">:</span> <span class="s2">&#34;100&#34;</span><span class="err">,</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="c1">#ubuntu.pkr.hcl
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">ssh_timeout</span>            <span class="o">=</span> <span class="s2">&#34;60m&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">ssh_handshake_attempts</span> <span class="o">=</span> <span class="m">100</span>
 </span></span></code></pre></div><div class="flex align-center gblog-post__anchorwrap">
     <h3 id="generate-password"
     >
         Generate Password
     </h3>
-    <a data-clipboard-text="http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/#generate-password" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Generate Password" href="#generate-password">
+    <a data-clipboard-text="http://localhost:1313/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/#generate-password" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Generate Password" href="#generate-password">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -424,7 +432,7 @@
     >
         Configure Identity
     </h3>
-    <a data-clipboard-text="http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/#configure-identity" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Configure Identity" href="#configure-identity">
+    <a data-clipboard-text="http://localhost:1313/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/#configure-identity" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Configure Identity" href="#configure-identity">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -439,7 +447,7 @@
     >
         SSH Settings
     </h3>
-    <a data-clipboard-text="http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/#ssh-settings" class="gblog-post__anchor clip flex align-center" aria-label="Anchor SSH Settings" href="#ssh-settings">
+    <a data-clipboard-text="http://localhost:1313/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/#ssh-settings" class="gblog-post__anchor clip flex align-center" aria-label="Anchor SSH Settings" href="#ssh-settings">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -458,20 +466,21 @@
     >
         Build
     </h3>
-    <a data-clipboard-text="http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/#build" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Build" href="#build">
+    <a data-clipboard-text="http://localhost:1313/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/#build" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Build" href="#build">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
-<p>When you&rsquo;ve created the required files and filled in all the variables, you&rsquo;re ready to build the VM. Use the below command to start the build. If you&rsquo;re overwriting the VM with each iteration, use the -force flag.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&gt; packer build -force ubuntu-2004.json
+<p>When you&rsquo;ve created the required files and filled in all the variables, you&rsquo;re ready to build the VM. Use the below to start the build. If you&rsquo;re overwriting the VM with each iteration, use the -force flag.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">❯ packer init .
+</span></span><span class="line"><span class="cl">❯ packer build -force .
 </span></span></code></pre></div><p><img
-  src="./progress-packer.png"
+  src="./packer-status.png"
   alt="Packer progress in terminal"
   
 /></p>
 <p>When you&rsquo;re done, you&rsquo;ll find the template in vSphere ready for use!</p>
 <p><img
-  src="./vsphere-ui.png"
+  src="./packer-vcenter.png"
   alt="vCenter Inventory with new template"
   
 /></p>
@@ -480,98 +489,201 @@
     >
         Required Files
     </h1>
-    <a data-clipboard-text="http://localhost:1313/blog/2020/build-ubuntu-vm-with-packer-on-vsphere/#required-files" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Required Files" href="#required-files">
+    <a data-clipboard-text="http://localhost:1313/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/#required-files" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Required Files" href="#required-files">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
-<p><strong>ubuntu-2004.json</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;variables&#34;</span><span class="p">:</span> <span class="p">{</span>    
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;vsphere-server&#34;</span><span class="p">:</span> <span class="s2">&#34;vcsa.virtjo.local&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;vsphere-user&#34;</span><span class="p">:</span> <span class="s2">&#34;administrator@vsphere.local&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;vsphere-password&#34;</span><span class="p">:</span> <span class="s2">&#34;SuperSecurePassword&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;vsphere-datacenter&#34;</span><span class="p">:</span> <span class="s2">&#34;SDDC&#34;</span><span class="p">,</span>    
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;vsphere-cluster&#34;</span><span class="p">:</span> <span class="s2">&#34;esxi01.virtjo.local&#34;</span><span class="p">,</span>    
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;vsphere-network&#34;</span><span class="p">:</span> <span class="s2">&#34;VLAN128&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;vsphere-datastore&#34;</span><span class="p">:</span> <span class="s2">&#34;NVME&#34;</span><span class="p">,</span>        
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;vm-name&#34;</span><span class="p">:</span> <span class="s2">&#34;ubnt-packer&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;vm-cpu-num&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;vm-mem-size&#34;</span><span class="p">:</span> <span class="s2">&#34;1024&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;vm-disk-size&#34;</span><span class="p">:</span> <span class="s2">&#34;25600&#34;</span><span class="p">,</span>    
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;iso_url&#34;</span><span class="p">:</span> <span class="s2">&#34;[NVME] ISO/ubuntu-20.04.1-live-server-amd64(1).iso&#34;</span>  
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;builders&#34;</span><span class="p">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;vsphere-iso&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;vcenter_server&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `vsphere-server`}}&#34;</span><span class="p">,</span>      
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;username&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `vsphere-user`}}&#34;</span><span class="p">,</span>      
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;password&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `vsphere-password`}}&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;insecure_connection&#34;</span><span class="p">:</span> <span class="s2">&#34;true&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;datacenter&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `vsphere-datacenter`}}&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;cluster&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `vsphere-cluster`}}&#34;</span><span class="p">,</span>      
-</span></span><span class="line"><span class="cl">          
+<p><strong>ubuntu.pkr.hcl</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">packer</span> {
+</span></span><span class="line"><span class="cl">  <span class="k">required_plugins</span> {
+</span></span><span class="line"><span class="cl"><span class="n">    vsphere</span> <span class="o">=</span> {
+</span></span><span class="line"><span class="cl"><span class="n">      source</span>  <span class="o">=</span> <span class="s2">&#34;github.com/hashicorp/vsphere&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">      version</span> <span class="o">=</span><span class="n"> &#34;&gt;</span><span class="o">=</span> <span class="m">1</span><span class="p">.</span><span class="m">0</span><span class="p">.</span><span class="m">0</span><span class="err">&#34;</span>
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;datastore&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `vsphere-datastore`}}&#34;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;guest_os_type&#34;</span><span class="p">:</span> <span class="s2">&#34;ubuntu64Guest&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;CPUs&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;RAM&#34;</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;RAM_reserve_all&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;disk_controller_type&#34;</span><span class="p">:</span> <span class="s2">&#34;pvscsi&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;storage&#34;</span><span class="p">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&#34;disk_size&#34;</span><span class="p">:</span> <span class="mi">15000</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&#34;disk_thin_provisioned&#34;</span><span class="p">:</span><span class="kc">true</span>
-</span></span><span class="line"><span class="cl">      <span class="p">},</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;network_adapters&#34;</span><span class="p">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&#34;network&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `vsphere-network`}}&#34;</span><span class="p">,</span> 
-</span></span><span class="line"><span class="cl">        <span class="nt">&#34;network_card&#34;</span><span class="p">:</span> <span class="s2">&#34;vmxnet3&#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="k">source</span> <span class="s2">&#34;vsphere-iso&#34; &#34;ubuntu&#34;</span> {<span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">  # Point to your ESXi host here
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">  vcenter_server</span>      <span class="o">=</span> <span class="k">var</span><span class="p">.</span><span class="k">vsphere_server</span><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">  #host                = var.vsphere_server
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="n">  username</span>            <span class="o">=</span> <span class="k">var</span><span class="p">.</span><span class="k">vsphere_user</span>
+</span></span><span class="line"><span class="cl"><span class="n">  password</span>            <span class="o">=</span> <span class="k">var</span><span class="p">.</span><span class="k">vsphere_password</span>
+</span></span><span class="line"><span class="cl"><span class="n">  insecure_connection</span> <span class="o">=</span> <span class="kt">true</span><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">  # Remove or comment these when using standalone ESXi
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">  datacenter</span> <span class="o">=</span> <span class="k">var</span><span class="p">.</span><span class="k">vsphere_datacenter</span>
+</span></span><span class="line"><span class="cl"><span class="n">  cluster</span>    <span class="o">=</span> <span class="k">var</span><span class="p">.</span><span class="k">vsphere_cluster</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;vm_name&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `vm-name`}}&#34;</span><span class="p">,</span>      
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;notes&#34;</span><span class="p">:</span> <span class="s2">&#34;Build via Packer&#34;</span><span class="p">,</span>            
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;convert_to_template&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="n">  datastore</span>           <span class="o">=</span> <span class="k">var</span><span class="p">.</span><span class="k">vsphere_datastore</span>
+</span></span><span class="line"><span class="cl"><span class="n">  guest_os_type</span>       <span class="o">=</span> <span class="s2">&#34;ubuntu64Guest&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;ssh_username&#34;</span><span class="p">:</span> <span class="s2">&#34;ubnt&#34;</span><span class="p">,</span>      
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;ssh_password&#34;</span><span class="p">:</span> <span class="s2">&#34;ubnt&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;ssh_timeout&#34;</span><span class="p">:</span> <span class="s2">&#34;20m&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;ssh_handshake_attempts&#34;</span><span class="p">:</span> <span class="s2">&#34;100&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="n">  CPUs</span>                <span class="o">=</span> <span class="k">var</span><span class="p">.</span><span class="k">vm_cpu_num</span>
+</span></span><span class="line"><span class="cl"><span class="n">  RAM</span>                 <span class="o">=</span> <span class="k">var</span><span class="p">.</span><span class="k">vm_mem_size</span>
+</span></span><span class="line"><span class="cl"><span class="n">  RAM_reserve_all</span>     <span class="o">=</span> <span class="kt">false</span><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">  # Must be a list for your plugin version
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">  disk_controller_type</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;pvscsi&#34;</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;iso_paths&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;{{user `iso_url`}}&#34;</span><span class="p">],</span> 
+</span></span><span class="line"><span class="cl">  <span class="k">storage</span> {
+</span></span><span class="line"><span class="cl"><span class="n">    disk_size</span>             <span class="o">=</span> <span class="k">var</span><span class="p">.</span><span class="k">vm_disk_size</span>
+</span></span><span class="line"><span class="cl"><span class="n">    disk_thin_provisioned</span> <span class="o">=</span> <span class="kt">true</span>
+</span></span><span class="line"><span class="cl">  }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;cd_files&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;./http/user-data&#34;</span><span class="p">,</span> <span class="s2">&#34;./http/meta-data&#34;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;cd_label&#34;</span><span class="p">:</span> <span class="s2">&#34;cidata&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;boot_wait&#34;</span><span class="p">:</span> <span class="s2">&#34;2s&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;boot_command&#34;</span><span class="p">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&lt;enter&gt;&lt;wait2&gt;&lt;enter&gt;&lt;wait&gt;&lt;f6&gt;&lt;esc&gt;&lt;wait&gt;&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34; autoinstall&lt;wait2&gt; ds=nocloud;&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&lt;wait&gt;&lt;enter&gt;&#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">],</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&#34;shutdown_command&#34;</span><span class="p">:</span> <span class="s2">&#34;echo &#39;ubnt&#39;|sudo -S shutdown -P now&#34;</span> 
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">network_adapters</span> {
+</span></span><span class="line"><span class="cl"><span class="n">    network</span>      <span class="o">=</span> <span class="k">var</span><span class="p">.</span><span class="k">vsphere_network</span><span class="c1">   # ESXi portgroup name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">    network_card</span> <span class="o">=</span> <span class="s2">&#34;vmxnet3&#34;</span>
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">  vm_name</span>             <span class="o">=</span> <span class="k">var</span><span class="p">.</span><span class="k">vm_name</span>
+</span></span><span class="line"><span class="cl"><span class="n">  notes</span>               <span class="o">=</span> <span class="s2">&#34;Build via Packer&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">  convert_to_template</span> <span class="o">=</span> <span class="kt">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">  ssh_username</span>           <span class="o">=</span> <span class="s2">&#34;ubnt&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">  ssh_password</span>           <span class="o">=</span> <span class="s2">&#34;ubnt&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">  ssh_timeout</span>            <span class="o">=</span> <span class="s2">&#34;60m&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">  ssh_handshake_attempts</span> <span class="o">=</span> <span class="m">100</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">  iso_paths</span> <span class="o">=</span> <span class="p">[</span><span class="k">var</span><span class="p">.</span><span class="k">iso_url</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">  cd_files</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;./http/user-data&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;./http/meta-data&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">  cd_label</span>  <span class="o">=</span> <span class="s2">&#34;cidata&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">  boot_wait</span> <span class="o">=</span> <span class="s2">&#34;10s&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">  boot_command</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;c&#34;, &#34;&lt;wait3s&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="n">    &#34;linux /casper/vmlinuz autoinstall ds</span><span class="o">=</span><span class="n">nocloud;s</span><span class="o">=</span><span class="err">/</span><span class="k">cdrom</span><span class="err">/</span><span class="s2">&#34;, &#34;&lt;enter&gt;&lt;wait3s&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;initrd /casper/initrd&#34;, &#34;&lt;enter&gt;&lt;wait3s&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;boot&#34;, &#34;&lt;enter&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">  shutdown_command</span> <span class="o">=</span> <span class="s2">&#34;echo &#39;ubnt&#39;|sudo -S shutdown -P now&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">build</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  sources</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;source.vsphere-iso.ubuntu&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="k">provisioner</span> <span class="s2">&#34;shell&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">    inline</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;echo set debconf to Noninteractive&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;echo &#39;debconf debconf/frontend select Noninteractive&#39; | sudo debconf-set-selections&#34;</span> <span class="p">]</span>
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  <span class="k">provisioner</span> <span class="s2">&#34;shell&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">    inline</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;sudo apt-get -y install util-linux-extra&#34;</span> <span class="p">]</span>
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  <span class="k">provisioner</span> <span class="s2">&#34;shell&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">    script</span> <span class="o">=</span> <span class="s2">&#34;./docker-engine.sh&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">    pause_before</span> <span class="o">=</span> <span class="s2">&#34;10s&#34;</span>
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p><strong>docker-engine.sh</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#docker-engine.sh</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sleep <span class="m">30</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add Docker&#39;s official GPG key:</span>
+</span></span><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">sudo apt-get -y install ca-certificates curl
+</span></span><span class="line"><span class="cl">sudo install -m <span class="m">0755</span> -d /etc/apt/keyrings
+</span></span><span class="line"><span class="cl">sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+</span></span><span class="line"><span class="cl">sudo chmod a+r /etc/apt/keyrings/docker.asc
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add the repository to Apt sources:</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  <span class="s2">&#34;deb [arch=</span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2"> signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+</span></span></span><span class="line"><span class="cl"><span class="s2">  </span><span class="k">$(</span>. /etc/os-release <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">UBUNTU_CODENAME</span><span class="k">:-</span><span class="nv">$VERSION_CODENAME</span><span class="si">}</span><span class="s2">&#34;</span><span class="k">)</span><span class="s2"> stable&#34;</span> <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</span></span><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+</span></span></code></pre></div><p><strong>ubuntu.auto.pkrvars.hcl</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="c1"># WARNING: This file contains secrets. Don&#39;t commit it. Add to .gitignore. 🔒
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">vsphere_server</span>     <span class="o">=</span> <span class="s2">&#34;10.128.128.101&#34;</span><span class="c1">                   # vCenter address if using datacenter/cluster
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">vsphere_user</span>       <span class="o">=</span> <span class="s2">&#34;administrator@vsphere.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vsphere_password</span>   <span class="o">=</span> <span class="s2">&#34;supersecretpassword&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vsphere_datacenter</span> <span class="o">=</span> <span class="s2">&#34;Datacenter&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vsphere_cluster</span>    <span class="o">=</span> <span class="s2">&#34;Cluster&#34;</span><span class="c1">             # Must be the vSphere Cluster name or ESXi hostname
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="n">vsphere_network</span>   <span class="o">=</span> <span class="s2">&#34;VLAN128&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vsphere_datastore</span> <span class="o">=</span> <span class="s2">&#34;datastore2&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">vm_name</span>      <span class="o">=</span> <span class="s2">&#34;ubnt-packer&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vm_cpu_num</span>   <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">vm_mem_size</span>  <span class="o">=</span> <span class="m">1024</span>
+</span></span><span class="line"><span class="cl"><span class="n">vm_disk_size</span> <span class="o">=</span> <span class="m">25600</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">iso_url</span> <span class="o">=</span> <span class="s2">&#34;[datastore2] ISO/ubuntu-24.04.3-live-server-amd64.iso&#34;</span>
+</span></span></code></pre></div><p><strong>variables.pkr.hcl</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">variable</span> <span class="s2">&#34;vsphere_server&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  type</span> <span class="o">=</span> <span class="k">string</span>
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">variable</span> <span class="s2">&#34;vsphere_user&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  type</span> <span class="o">=</span> <span class="k">string</span>
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">variable</span> <span class="s2">&#34;vsphere_password&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  type</span>      <span class="o">=</span> <span class="k">string</span>
+</span></span><span class="line"><span class="cl"><span class="n">  sensitive</span> <span class="o">=</span> <span class="kt">true</span>
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">variable</span> <span class="s2">&#34;vsphere_datacenter&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  type</span> <span class="o">=</span> <span class="k">string</span>
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">variable</span> <span class="s2">&#34;vsphere_cluster&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  type</span> <span class="o">=</span> <span class="k">string</span>
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">variable</span> <span class="s2">&#34;vsphere_network&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  type</span> <span class="o">=</span> <span class="k">string</span>
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">variable</span> <span class="s2">&#34;vsphere_datastore&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  type</span> <span class="o">=</span> <span class="k">string</span>
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">variable</span> <span class="s2">&#34;vm_name&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  type</span> <span class="o">=</span> <span class="k">string</span>
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">variable</span> <span class="s2">&#34;vm_cpu_num&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  type</span> <span class="o">=</span> <span class="k">number</span>
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">variable</span> <span class="s2">&#34;vm_mem_size&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  type</span> <span class="o">=</span> <span class="k">number</span>
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">variable</span> <span class="s2">&#34;vm_disk_size&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  type</span> <span class="o">=</span> <span class="k">number</span>
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">variable</span> <span class="s2">&#34;iso_url&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  type</span> <span class="o">=</span> <span class="k">string</span>
+</span></span><span class="line"><span class="cl">}
 </span></span></code></pre></div><p><strong>user-data</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#cloud-config</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">autoinstall</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">locale</span><span class="p">:</span><span class="w"> </span><span class="l">en_US</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">keyboard</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">layout</span><span class="p">:</span><span class="w"> </span><span class="l">en</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">variant</span><span class="p">:</span><span class="w"> </span><span class="l">us</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">network</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">network</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ethernets</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ens192</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">layout</span><span class="p">:</span><span class="w"> </span><span class="l">se</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">storage</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">layout</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">lvm</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">identity</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-packer</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">ubnt</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">$6$RAVeOPg.9rJylcnK$tm6KVpRXxTGb0et.1PQcmLVCFLjIVaLye.Weiizxw3ecGRI2kA0JH7nFxkJCz4oeZphSO4qzYSwncE/s34UHg0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">$6$eZsKuZ3lwrfwvrJ3$FSmB.RPl9doTTe57fHDvbMjyu/wFZOcNfuGZ82id4ZZYbUZ0P9GP6ZWamYK3JZzwnMIjL1WEVczqHf03.IqYS/</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ssh</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">install-server</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">allow-pw</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
