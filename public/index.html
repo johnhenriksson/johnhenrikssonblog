@@ -280,6 +280,141 @@
     <article class="gblog-post">
       <header class="gblog-post__header">
         <h1 class="gblog-post__title">
+          <a href="/blog/2025/veeam-immutable-repository-with-netapp-ontap-s3/">Veeam Immutable Repository with NetApp ONTAP S3</a>
+        </h1>
+      </header>
+
+      <section class="gblog-markdown">
+        <p>In this blog post I will go through how to use the NetApp ONTAP storage to enable Immutable S3 repository in Veeam.</p>
+<p>I&rsquo;ve tested this with <strong>ONTAP 9.17.1</strong> and Veeam <strong>v12.3.2</strong></p>
+<p>The basics steps to enable Immutable repository in Veeam with ONTAP S3 is</p>
+<ol>
+<li>
+<p>Create the bucket in System Manager</p>
+</li>
+<li>
+<p>Enable Object lock &amp; ensure all permissions on object lock are enabled for the user that access the bucket, I’ve noticed that after you enable object lock more permissions options are available.</p>
+      </section>
+      <div class="gblog-post__readmore">
+        
+          <a
+            class="flex-inline align-center fake-link"
+            title="Read full post"
+            href="/blog/2025/veeam-immutable-repository-with-netapp-ontap-s3/"
+          >
+            Read full post
+            <i class="gblog-icon">gblog_arrow_right</i>
+          </a>
+        
+      </div>
+
+      <footer class="gblog-post__footer">
+        <div class="flex flex-wrap align-center gblog-post__meta">
+          <span class="flex align-center no-wrap gblog-post__meta--update">
+  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
+  <span class="gblog-post__tag">
+    <time datetime="2025-10-31T00:00:00Z">
+      
+      Oct 31, 2025
+    </time>
+  </span>
+</span>
+
+<span class="flex align-center no-wrap gblog-post__meta--readtime">
+  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
+  <span class="gblog-post__tag">2 min read</span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+      </footer>
+    </article>
+  
+    <article class="gblog-post">
+      <header class="gblog-post__header">
+        <h1 class="gblog-post__title">
+          <a href="/blog/2025/configure-netapp-ontap-nfs-with-proxmox-ve/">Configure NetApp ONTAP NFS with Proxmox VE</a>
+        </h1>
+      </header>
+
+      <section class="gblog-markdown">
+        <div class="flex align-center gblog-post__anchorwrap">
+    <h2 id="multipathing-with-nfs"
+    >
+        Multipathing with NFS
+    </h2>
+    <a data-clipboard-text="http://localhost:1313/blog/2025/configure-netapp-ontap-nfs-with-proxmox-ve/#multipathing-with-nfs" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Multipathing with NFS" href="#multipathing-with-nfs">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
+<p>To achieve multipathing with ONTAP NFS and Proxmox you should use NFS Session Trunking. Trunking opens multiple connections to differents LIF&rsquo;s (IP&rsquo;s) on the NetApp NFS Server, increasing throuput and resiliency</p>
+<p>Read more on ONTAP NFS trunking at <a
+  class="gblog-markdown__link"
+  target="_blank"
+  href="https://docs.netapp.com/us-en/ontap/nfs-trunking/"
+>https://docs.netapp.com/us-en/ontap/nfs-trunking/</a></p>
+<p>On yout NFS server you need to enable NFS trunking with the below command, in this case we create an NFS server with the option <strong>-v4.2 enabled -v4.2-trunking enabled</strong></p>
+      </section>
+      <div class="gblog-post__readmore">
+        
+          <a
+            class="flex-inline align-center fake-link"
+            title="Read full post"
+            href="/blog/2025/configure-netapp-ontap-nfs-with-proxmox-ve/"
+          >
+            Read full post
+            <i class="gblog-icon">gblog_arrow_right</i>
+          </a>
+        
+      </div>
+
+      <footer class="gblog-post__footer">
+        <div class="flex flex-wrap align-center gblog-post__meta">
+          <span class="flex align-center no-wrap gblog-post__meta--update">
+  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
+  <span class="gblog-post__tag">
+    <time datetime="2025-10-04T00:00:00Z">
+      
+      Oct 4, 2025
+    </time>
+  </span>
+</span>
+
+<span class="flex align-center no-wrap gblog-post__meta--readtime">
+  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
+  <span class="gblog-post__tag">2 min read</span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+      </footer>
+    </article>
+  
+    <article class="gblog-post">
+      <header class="gblog-post__header">
+        <h1 class="gblog-post__title">
           <a href="/blog/2025/build-ubuntu-vm-on-vsphere-with-packer/">Build Ubuntu 24.04 VM on vSphere with Packer</a>
         </h1>
       </header>
@@ -768,126 +903,6 @@
 <span class="flex align-center no-wrap gblog-post__meta--readtime">
   <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
   <span class="gblog-post__tag">4 min read</span>
-</span>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-      </footer>
-    </article>
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
-          <a href="/blog/2020/trident-persistance-in-an-ephemeral-world/">Trident - Persistance in an Ephemeral World</a>
-        </h1>
-      </header>
-
-      <section class="gblog-markdown">
-        <p><img
-  src="./trident-logo.png"
-  alt="Trindent Logo"
-  
-/></p>
-<p>We all know Kubernetes is winning the container orchestration battle. We&rsquo;ve seen a shift in application development and operations. Historically, software vendors shipped .EXE files to customers, small and large. The update cycle meant a new .EXE release every 6-12 months, or something similar.</p>
-<p>Now, the reality is that more and more software vendors turn to containers as shipping their products. Containers provide the ability to re-create the application regardless of the environment, both in development and production. No more need to install the correct dependencies on each development machine and production environment; just run docker, and you&rsquo;re ready to go.</p>
-      </section>
-      <div class="gblog-post__readmore">
-        
-          <a
-            class="flex-inline align-center fake-link"
-            title="Read full post"
-            href="/blog/2020/trident-persistance-in-an-ephemeral-world/"
-          >
-            Read full post
-            <i class="gblog-icon">gblog_arrow_right</i>
-          </a>
-        
-      </div>
-
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
-  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
-  <span class="gblog-post__tag">
-    <time datetime="2020-10-02T00:00:00Z">
-      
-      Oct 2, 2020
-    </time>
-  </span>
-</span>
-
-<span class="flex align-center no-wrap gblog-post__meta--readtime">
-  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">3 min read</span>
-</span>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-      </footer>
-    </article>
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
-          <a href="/blog/2020/deploy-vcd-10-w-powershell/">Deploy VMware Cloud Director with PowerShell</a>
-        </h1>
-      </header>
-
-      <section class="gblog-markdown">
-        <p>In my home lab, I like to automate as much as possible so I can bring stuff up/down quickly. To achieve this I use several tools such as Ansible, Terraform and PowerShell. This time I decided on using PowerShell to quickly bring up VCD with the same settings every time.</p>
-<p>This script deploys the appliance and please, edit the settings to fit your environment.</p>
-<p>First, you need to download the VCD Appliance 10.1.1 and point the <strong>$ovfPath</strong> variable to the .ova file.</p>
-      </section>
-      <div class="gblog-post__readmore">
-        
-          <a
-            class="flex-inline align-center fake-link"
-            title="Read full post"
-            href="/blog/2020/deploy-vcd-10-w-powershell/"
-          >
-            Read full post
-            <i class="gblog-icon">gblog_arrow_right</i>
-          </a>
-        
-      </div>
-
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
-  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
-  <span class="gblog-post__tag">
-    <time datetime="2020-06-04T00:00:00Z">
-      
-      Jun 4, 2020
-    </time>
-  </span>
-</span>
-
-<span class="flex align-center no-wrap gblog-post__meta--readtime">
-  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">2 min read</span>
 </span>
 
 
